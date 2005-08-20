@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 package Tag::Reader::Perl;
 #------------------------------------------------------------------------------
-# $Id: Perl.pm,v 1.2 2005-08-20 08:28:10 skim Exp $
+# $Id: Perl.pm,v 1.3 2005-08-20 09:02:09 skim Exp $
 
 # Pragmas.
 use strict;
@@ -21,7 +21,7 @@ sub new {
 	my $self = bless {}, $class;
 
 	# Filename.
-	$self->{'filename'} = '';
+	$self->{'filename'} = shift;
 
 	# Process params.
 	while (@_) {
@@ -35,9 +35,10 @@ sub new {
 	if (! $self->{'filename'}) {
 		err "Filename must be a string scalar.";
 	}
-	if (! open($self->{'fd'}, "<$self->{'filename'}")) {
+	if (! open(INF, "<$self->{'filename'}")) {
 		err "Can not read file \"$self->{'filename'}\".";
 	}
+	$self->{'fd'} = *INF;
 
 	# Default values.
 	$self->{'charpos'} = 0;
@@ -74,16 +75,15 @@ sub gettoken {
 	my $chn = '';
 
 	# Find the next tag.
-	while ($state != 3 && ($chn = getc($self->{'fd'})) != *EOF) {
+	while ($state != 3 && ($chn = getc($self->{'fd'}))) {
 		$self->{'charpos'}++;
 
 		# Read one more character ahead so we have always 2. 
 		if (! $ch) { 
 			$ch = $chn;
-#			continue;
 			next;
 		}
-		if ($ch == '\n') {
+		if ($ch eq '\n') {
 			$self->{'fileline'}++;
 			$self->{'charpos'} = 0;
 		}
@@ -303,7 +303,7 @@ sub gettoken {
 		$ch = $chn;
 	}
 
-	if ($chn == *EOF) {
+	if ($chn eq *EOF) {
 
 		# Put the last char (ch) in the buffer.
 		if ($ch) {
@@ -344,7 +344,7 @@ sub DESTROY {
 # Destroy object.
 
 	my $self = shift;
-	close($self->{'fd'});
+#	close($self->{'fd'});
 }
 
 #------------------------------------------------------------------------------
@@ -357,7 +357,7 @@ sub is_start_of_tag {
 # TODO
 
 	my $ch = shift;
-	if ($ch eq '!' || $ch eq '/' || $ch eq '?' || $ch =~ /^[:allnum:]+$/) {
+	if ($ch eq '!' || $ch eq '/' || $ch eq '?' || $ch =~ /^\d+$/) {
 
 		return 1;
 	}
@@ -370,7 +370,7 @@ sub is_in_tag {
 # Normal characters in a tag.
 
 	my $ch = shift;
-	if ($ch eq ':' || $ch eq '[' || $ch =~ /^[:allnum:]+$/) {
+	if ($ch eq ':' || $ch eq '[' || $ch =~ /^\d+$/) {
 		return 1;
 	}
 	return 0;
