@@ -1,0 +1,20 @@
+$Id: concept,v 1.1 2005-08-20 06:00:01 skim Exp $
+
+Concept
+=======
+Detection of <.
+Detection of type of tag.
+-> special detection.
+
+First version:
+- Main tags. 
+  - <tag>
+  - <!-- comment -->
+  - <?instruction?>
+  - <![%foo[<!ELEMENT foo EMPTY>]]>
+  - <![CDATA[<text>text</text>]]>
+  - <!DOCTYPE [ <!ELEMENT foo EMPTY> ]>
+
+Seond version:
+- Main tags.
+- Parse long tags to subtags.

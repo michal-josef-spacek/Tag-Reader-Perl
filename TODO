@@ -1,0 +1,10 @@
+$Id: TODO,v 1.1 2005-08-20 06:00:01 skim Exp $
+
+TODO
+====
+1. Preimplementovat Tag::Reader jenom v perlu.
+2. Udelat to poradne, aby to parsovalo vsechno.
+3. 
+
+Applied
+=======
