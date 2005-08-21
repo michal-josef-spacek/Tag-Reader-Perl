@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 package Tag::Reader::Perl;
 #------------------------------------------------------------------------------
-# $Id: Perl.pm,v 1.3 2005-08-20 09:02:09 skim Exp $
+# $Id: Perl.pm,v 1.4 2005-08-21 10:51:50 skim Exp $
 
 # Pragmas.
 use strict;
@@ -83,7 +83,7 @@ sub gettoken {
 			$ch = $chn;
 			next;
 		}
-		if ($ch eq '\n') {
+		if ($ch eq "\n") {
 			$self->{'fileline'}++;
 			$self->{'charpos'} = 0;
 		}
@@ -127,12 +127,12 @@ sub gettoken {
 				if ((is_start_of_tag($ch) && $typepos == 0) 
 					|| is_in_tag($ch)) {
 						
-					$self->{'tagtype'}->[$typepos] = ul($ch);
+					$self->{'tagtype'}->[$typepos] = lc($ch);
 					$typepos++;
 			
 					# CDATA detection.
 					if ($substate == 1 
-						&& $self->{'tagtype'} 
+						&& join('', @{$self->{'tagtype'}}) 
 						eq '![cdata[') {
 						
 						# Cdata stay.
@@ -142,13 +142,12 @@ sub gettoken {
 						$substate = 0;
 						
 						# Symbol for cdata. 
-						$self->{'tagtype'} = '<!CDATA[';
+						@{$self->{'tagtype'}}, 
+							('<', '!', 'C', 'D', 
+							'A', 'T', 'A', '[');
 						$typepos = 9;
 					}
 				} else {
-					# End of tag type e.g "<a " -> save 
-					# only "a" in tagtype array.
-					# $self->{'tagtype'}->[$typepos] = 0;
 
 					# Mark end.
 					$typeposdone = 1;
@@ -191,7 +190,7 @@ sub gettoken {
 				
 				# Some comments are <!-----, but we want 
 				# always the same tagtype for all comments:
-				$self->{'tagtype'} = '!--';
+				@{$self->{'tagtype'}} = ('!', '-', '-');
 				$typepos = 3;
 			}
 
@@ -311,24 +310,26 @@ sub gettoken {
 			$bufpos++;
 		}
 	} else {
+print "back\n";
 
 		# Put back chn for the next round.
-		$self->{'charpos'}--;
+#		$self->{'charpos'}--;
 #		if (PerlIO_ungetc(self->fd, chn) == EOF) {
 #			PerlIO_printf(PerlIO_stderr(), "%s:%d: ERROR, "
 #				"Tag::Reader library can not ungetc \"%c\" "
 #				"before returning\n", self->filename, 
 #				self->fileline, chn);
-			exit 1;
+#			exit 1;
 #		}
 	}
 
 	if ($bufpos > 0) {
 
 		# We have a tag or text and we return it.
-		return wantarray ? ($self->{'buffer'}, $self->{'tagtype'}, 
+		return wantarray ? (join('', @{$self->{'buffer'}}), 
+			join('', @{$self->{'tagtype'}}), 
 			$self->{'tagline'}, $self->{'tagcharpos'}) 
-			: $self->{'buffer'};
+			: join('', @{$self->{'buffer'}});
 	} else {
 
 		# We are at the end of the file and no tag was found 
@@ -356,8 +357,9 @@ sub is_start_of_tag {
 #------------------------------------------------------------------------------
 # TODO
 
-	my $ch = shift;
-	if ($ch eq '!' || $ch eq '/' || $ch eq '?' || $ch =~ /^\d+$/) {
+	my $char = shift;
+	if ($char eq '!' || $char eq '/' || $char eq '?' 
+		|| $char =~ /^[\d\w]+$/) {
 
 		return 1;
 	}
@@ -370,7 +372,7 @@ sub is_in_tag {
 # Normal characters in a tag.
 
 	my $ch = shift;
-	if ($ch eq ':' || $ch eq '[' || $ch =~ /^\d+$/) {
+	if ($ch eq ':' || $ch eq '[' || $ch =~ /^[\d\w]+$/) {
 		return 1;
 	}
 	return 0;
