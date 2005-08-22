@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 package Tag::Reader::Perl;
 #------------------------------------------------------------------------------
-# $Id: Perl.pm,v 1.5 2005-08-22 00:30:51 skim Exp $
+# $Id: Perl.pm,v 1.6 2005-08-22 00:50:38 skim Exp $
 
 # Pragmas.
 use strict;
@@ -264,7 +264,7 @@ sub _is_in_tag_name {
 # Normal characters in a tag name.
 
 	my $char = shift;
-	if ($char eq ':' || $char eq '[' || $char eq '-' 
+	if ($char eq ':' || $char eq '[' || $char eq '-' || $char eq '%'
 		|| $char =~ /^[\d\w]+$/) {
 
 		return 1;
