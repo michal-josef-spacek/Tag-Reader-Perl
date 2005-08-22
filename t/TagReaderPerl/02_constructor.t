@@ -1,4 +1,4 @@
-# $Id: 02_constructor.t,v 1.1 2005-08-20 06:02:48 skim Exp $
+# $Id: 02_constructor.t,v 1.2 2005-08-22 00:30:20 skim Exp $
 
 # Test directory.
 my $test_dir = "$ENV{'PWD'}/t/TagReaderPerl";
@@ -8,8 +8,7 @@ my $obj;
 eval {
 	$obj = $class->new;
 };
-$@ =~ s/(.*)\ at.*\n/$1/;
-ok($@, 'Usage: Tag::Reader::new(class, filename)');
+ok($@, "Tag::Reader::Perl: Filename must be a string scalar.\n");
 
 print "Testing: Right new(filename) constructor.\n" if $debug;
 $obj = $class->new($test_dir.'/data/start_tag1.tags');

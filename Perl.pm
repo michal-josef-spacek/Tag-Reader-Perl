@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 package Tag::Reader::Perl;
 #------------------------------------------------------------------------------
-# $Id: Perl.pm,v 1.4 2005-08-21 10:51:50 skim Exp $
+# $Id: Perl.pm,v 1.5 2005-08-22 00:30:51 skim Exp $
 
 # Pragmas.
 use strict;
@@ -38,7 +38,9 @@ sub new {
 	if (! open(INF, "<$self->{'filename'}")) {
 		err "Can not read file \"$self->{'filename'}\".";
 	}
-	$self->{'fd'} = *INF;
+	foreach (<INF>) {
+		$self->{'text'} .= $_;
+	}
 
 	# Default values.
 	$self->{'charpos'} = 0;
@@ -55,297 +57,187 @@ sub gettoken {
 #------------------------------------------------------------------------------
 # Get tag token.
 
-	my $self = shift;
-	my $showerrors = shift;
+	my ($self, $showerrors) = @_;
 
 	# Check file.
 	if (! $self->{'fileline'}) {
 		err "Object not initialized.";
 	}
 
-	my $state = 0;
-	my $substate = 0;
-	my $bufpos = 0;
-	my $typeposdone = 0;
-	my $typepos = 0;
-	my $brace_num = 0;
-	my $bracket_num = 0;
-	$self->{'tagline'} = $self->{'fileline'};
-	my $ch = '';
-	my $chn = '';
+	# Stay.
+	my $stay = 0;
+	my $spec_stay = 0;
+	my $comment_stay = 0;
 
-	# Find the next tag.
-	while ($state != 3 && ($chn = getc($self->{'fd'}))) {
+	# Data.
+	$self->{'data'} = [];
+
+	# Tag type.
+	$self->{'tag_type'} = 'data';
+	$self->{'tag_length'} = 0;
+
+	# Braces.
+	my ($brace, $bracket) = (0, 0);
+
+	# Tag line.
+	$self->{'tagline'} = $self->{'fileline'};
+	$self->{'tagcharpos'} = 0;
+
+	# Foreach chars.
+	while (defined $self->{'text'} 
+		&& defined (my $char = substr($self->{'text'}, 0, 1))) { 
+
+		# Char position.
 		$self->{'charpos'}++;
 
-		# Read one more character ahead so we have always 2. 
-		if (! $ch) { 
-			$ch = $chn;
-			next;
+		# Normal tag.
+		if ($spec_stay == 0) {
+
+			# Begin of normal tag.
+			if ($stay == 0 && $char eq '<') {
+
+				# In tag.
+				if ($#{$self->{'data'}} == -1) {
+					$self->{'tagcharpos'} 	
+						= $self->{'charpos'};
+					$stay = 1;
+					push @{$self->{'data'}}, $char;
+					$self->{'tag_length'} = 1;
+
+				# Start of tag, after data.
+				} else {
+					$stay = 99;
+				}
+
+			# Text.
+			} elsif ($stay == 0) {
+				push @{$self->{'data'}}, $char;
+				if ($self->{'tagcharpos'} == 0) {
+					$self->{'tagcharpos'} 
+						= $self->{'charpos'};
+				}
+
+			# In a normal tag.
+			} elsif ($stay == 1) {
+
+				# End of normal tag.
+				if ($char eq '>') {
+					$stay = 98;
+					$self->_tag_type;
+					push @{$self->{'data'}}, $char;
+					$self->{'tag_length'} = 0;
+
+				# First charcter after '<' in normal tag.
+				} elsif ($self->{'tag_length'} == 1 
+					&& _is_first_char_of_tag($char)) {
+
+					if ($char eq '!') {
+						$spec_stay = 1;
+					}
+					push @{$self->{'data'}}, $char;
+					$self->{'tag_length'}++;
+
+				# Next character in normal tag (name).
+				} elsif ($self->{'tag_length'} > 1
+					&& _is_in_tag_name($char)) {
+
+					push @{$self->{'data'}}, $char;
+					$self->{'tag_length'}++;
+
+				# Other characters.
+				} else {
+					if ($self->{'tag_length'} == 1 
+						|| $char eq '<') {
+
+						err "Bad tag.";
+					}
+					$self->_tag_type;
+					push @{$self->{'data'}}, $char;
+				}
+			}
+
+		# Other tags.
+		} else {
+			# End of normal tag.
+			if ($char eq '>') { 
+				if (($brace == 0 && $bracket == 0
+					&& $spec_stay < 3) 
+					|| ($spec_stay == 3 
+					&& join('', 
+					@{$self->{'data'}}[-2 .. -1]) 
+					eq '--')) {
+
+					$stay = 98;
+					$spec_stay = 0;
+					$self->{'tag_length'} = 0;
+				}
+				$bracket--;
+				push @{$self->{'data'}}, $char;
+
+			# Comment.
+			} elsif ($spec_stay == 3) {
+				$self->_tag_type;
+				push @{$self->{'data'}}, $char;
+
+			} elsif ($char eq ']') {
+				push @{$self->{'data'}}, $char;
+				$brace--;
+
+			# Next character in normal tag (name).
+			} elsif ($self->{'tag_length'} > 1
+				&& _is_in_tag_name($char)) {
+
+				# Comment detect.
+				if (($self->{'tag_length'} == 2
+					|| $self->{'tag_length'} == 3)
+					&& $char eq '-') {
+				
+					$spec_stay++;
+				}
+				if ($char eq '[') {
+					$brace++;
+				}
+				push @{$self->{'data'}}, $char;
+				$self->{'tag_length'}++;
+
+			# Other characters.
+			} else {
+				if ($char eq '<') {
+					$bracket++;
+				}
+				if ($char eq '[') {
+					$brace++;
+				}
+				$self->_tag_type;
+				push @{$self->{'data'}}, $char;
+			}
 		}
-		if ($ch eq "\n") {
+
+		# Remove char from buffer.
+		if ($stay != 99) {
+			if (length $self->{'text'} > 1) {
+				$self->{'text'} = substr($self->{'text'}, 1);
+			} else {
+				$self->{'text'} = undef;
+			}
+		}
+		if ($stay == 98 || $stay == 99) {
+			if ($stay == 99) {
+				$self->{'charpos'}--;
+			}
+			last;
+		}
+
+		# Next line.
+		if ($char eq "\n") {
 			$self->{'fileline'}++;
 			$self->{'charpos'} = 0;
 		}
-		$self->{'buffer'}->[$bufpos] = $ch;
-		$bufpos++;
-
-		# Outside of tag and we start tag here.
-		if ($state == 0) {
-			$self->{'tagcharpos'} = $self->{'charpos'};
-
-			# Start tag.
-			if ($ch eq '<') {
-				if (is_start_of_tag($chn)) { 
-
-					# We will be reading a tag.
-					$state = 1;
-				} else {
-					
-					# We will be reading a text/paragraph. 
-					$state = 2; 
-
-					# Warning.
-					warn "$self->{'filename'}:".
-						"$self->{'fileline'}:".
-						"$self->{'charpos'}: ".
-						"Warning, single ".
-						"\'<\' should ".
-						"be written as &lt;\n"
-						if $showerrors;
-				}
-
-			# We will be reading a text/paragraph.
-			} else {
-				$state = 2;
-			}
-
-		# Stay for inside a tag. Wait for '>'.
-		} elsif ($state == 1) {
-			if ($typeposdone == 0) {
-				
-				if ((is_start_of_tag($ch) && $typepos == 0) 
-					|| is_in_tag($ch)) {
-						
-					$self->{'tagtype'}->[$typepos] = lc($ch);
-					$typepos++;
-			
-					# CDATA detection.
-					if ($substate == 1 
-						&& join('', @{$self->{'tagtype'}}) 
-						eq '![cdata[') {
-						
-						# Cdata stay.
-						$state = 40;
-
-						# Revert substate. 
-						$substate = 0;
-						
-						# Symbol for cdata. 
-						@{$self->{'tagtype'}}, 
-							('<', '!', 'C', 'D', 
-							'A', 'T', 'A', '[');
-						$typepos = 9;
-					}
-				} else {
-
-					# Mark end.
-					$typeposdone = 1;
-				}
-			}
-
-			# Bad start of tag. 
-			if ($ch eq '<') {
-				if ($substate == 1) {
-					$brace_num++;
-					
-				} elsif ($showerrors) {
-					err "$self->{'filename'}:".
-						"$self->{'fileline'}: ".
-						"Warning, single \'<\' or tag ".
-						"starting at line ".
-						"$self->{'tagline'} not terminated\n";
-				}
-			}
-
-			# End of tag detection.
-			if ($ch eq '>') {
-
-				# Done reading this tag.
-				if ($brace_num == 0 && $bracket_num == 0) {
-					$state = 3;
-				}
-				if ($substate == 1 && $brace_num > 0) {
-					$brace_num--;
-				}
-			}
-
-			# Comment detection.
-			if ($substate == 0 && $ch eq '!' && $chn eq '-' 
-				&& $bufpos > 1 
-				&& $self->{'buffer'}->[$bufpos - 2] == '<') {
-
-				# Start of comment handling.
-				$state = 30; 
-				
-				# Some comments are <!-----, but we want 
-				# always the same tagtype for all comments:
-				@{$self->{'tagtype'}} = ('!', '-', '-');
-				$typepos = 3;
-			}
-
-			if ($substate == 0 && $ch eq '!') {
-				# TODO Doctype.
-			}
-			
-			if ($chn eq '[') {
-
-				# Start of special '<!['
-				if ($ch == '!' && $bufpos > 1 && $substate == 0
-					&& $self->{'buffer'}->[$bufpos - 2] eq '<') {
-
-					$substate = 1;
-
-				# Start doctype subdoc. 
-				} else {
-					$bracket_num++;
-				}
-			}
-			
-			# End doctype subdoc. 
-			if ($substate == 1 && $chn eq ']' && $bracket_num > 0) {
-				$bracket_num--;
-			}
-
-		# Inside a text. Wait for start of tag.
-		} elsif ($state == 2) {
-			if ($ch eq '>' && $showerrors) {
-				warn "$self->{'filename'}:".
-					"$self->{'fileline'}:".
-					"$self->{'charpos'}: Warning, single ".
-					"\'>\' should be written as ".
-					"&gt;\n";
-			}
-			if ($ch eq '<') {
-
-				# First char.
-				if (is_start_of_tag($chn)) {
-
-					# Put the start of tag back, we want to
-					# return only the text part.
-					$self->{'charpos'}--;
-#					if (PerlIO_ungetc(self->fd, 
-#						chn) == EOF) {
-						
-#						PerlIO_printf(PerlIO_stderr(),
-#							"%s:%d: ERROR, "
-#							"Tag::Reader library "
-#							"can not ungetc "
-#							"\"%c\"\n",
-#							self->filename,
-#							self->fileline, chn);
-#						exit(1);
-#					}
-					$chn = $ch;
-					$bufpos--;
-					$state = 3;
-				} else {
-
-					# We will be reading 
-					# a text/paragraph.
-					$state = 2;
-					if ($showerrors) {
-						warn "$self->{'filename'}:".
-							"$self->{'fileline'}:".
-							"$self->{'charpos'}: ".
-							"Warning, ".
-							"single \'<\' should ".
-							"be written as &lt;\n";
-					}
-				}
-			}
-
-		# Comment handling, we have found "<!--", wait for comment 
-		# termination with "->".
-		} elsif ($state == 30) {
-			if ($ch eq '-' && $chn eq '>') {
-
-				# Done reading this comment tag just get the 
-				# closing '>'.
-				$state = 99;
-			}
-	
-		# End.
-		} elsif ($state == 99) {
-			$state = 3;
-
-		# Cdata stay.
-		} elsif ($state == 40) {
-
-			# Cdata handling, we have found "<![CDATA[", wait for 
-			# cdata termination with "]]>". 
-			if ($ch eq ']' && $chn eq '>') {
-
-				# Done reading this cdata tag just get the 
-				# closing '>'.
-				$state = 99;
-			}
-
-		# Bad stay.
-		} else {
-			err "$self->{'filename'}:$self->{'fileline'}: Programm 
-				Error, state = $state\n";
-			exit 1;
-		}
-
-		# Shift this and next char.
-		$ch = $chn;
 	}
-
-	if ($chn eq *EOF) {
-
-		# Put the last char (ch) in the buffer.
-		if ($ch) {
-			$self->{'buffer'}->[$bufpos] = $ch;
-			$bufpos++;
-		}
-	} else {
-print "back\n";
-
-		# Put back chn for the next round.
-#		$self->{'charpos'}--;
-#		if (PerlIO_ungetc(self->fd, chn) == EOF) {
-#			PerlIO_printf(PerlIO_stderr(), "%s:%d: ERROR, "
-#				"Tag::Reader library can not ungetc \"%c\" "
-#				"before returning\n", self->filename, 
-#				self->fileline, chn);
-#			exit 1;
-#		}
-	}
-
-	if ($bufpos > 0) {
-
-		# We have a tag or text and we return it.
-		return wantarray ? (join('', @{$self->{'buffer'}}), 
-			join('', @{$self->{'tagtype'}}), 
-			$self->{'tagline'}, $self->{'tagcharpos'}) 
-			: join('', @{$self->{'buffer'}});
-	} else {
-
-		# We are at the end of the file and no tag was found 
-		# return an empty list or string such that the user 
-		# will probably call destroy. 
-		return ();
-	}
-}
-
-#------------------------------------------------------------------------------
-sub DESTROY {
-#------------------------------------------------------------------------------
-# Destroy object.
-
-	my $self = shift;
-#	close($self->{'fd'});
+	my $data = join('', @{$self->{'data'}});
+	return () if $data eq '';
+	return wantarray ? ($data, $self->{'tag_type'}, $self->{'tagline'}, 
+		$self->{'tagcharpos'}) : $data;
 }
 
 #------------------------------------------------------------------------------
@@ -353,9 +245,9 @@ sub DESTROY {
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
-sub is_start_of_tag {
+sub _is_first_char_of_tag {
 #------------------------------------------------------------------------------
-# TODO
+# First character in tag.
 
 	my $char = shift;
 	if ($char eq '!' || $char eq '/' || $char eq '?' 
@@ -367,15 +259,31 @@ sub is_start_of_tag {
 }
 
 #------------------------------------------------------------------------------
-sub is_in_tag {
+sub _is_in_tag_name {
 #------------------------------------------------------------------------------
-# Normal characters in a tag.
+# Normal characters in a tag name.
 
-	my $ch = shift;
-	if ($ch eq ':' || $ch eq '[' || $ch =~ /^[\d\w]+$/) {
+	my $char = shift;
+	if ($char eq ':' || $char eq '[' || $char eq '-' 
+		|| $char =~ /^[\d\w]+$/) {
+
 		return 1;
 	}
 	return 0;
+}
+
+#------------------------------------------------------------------------------
+sub _tag_type {
+#------------------------------------------------------------------------------
+# Process tag type.
+
+	my $self = shift;
+	if ($self->{'tag_length'} > 0) {
+		$self->{'tag_type'} 
+			= lc(join('', @{$self->{'data'}}
+			[1 .. $self->{'tag_length'} - 1]));
+		$self->{'tag_length'} = 0;
+	}
 }
 
 1;

@@ -1,4 +1,4 @@
-# $Id: 06_tag.t,v 1.1 2005-08-20 06:02:48 skim Exp $
+# $Id: 06_tag.t,v 1.2 2005-08-22 00:30:20 skim Exp $
 
 # Test directory.
 my $test_dir = "$ENV{'PWD'}/t/TagReaderPerl";
@@ -9,19 +9,19 @@ my @tag = $obj->gettoken(1);
 ok($tag[0], "<text>");
 ok($tag[1], "text");
 ok($tag[2], 1);
-ok($tag[3], 2);
+ok($tag[3], 1);
 @tag = $obj->gettoken(1);
 ok($tag[0], 'text');
-ok($tag[1], '');
+ok($tag[1], 'data');
 ok($tag[2], 1);
-ok($tag[3], 8);
+ok($tag[3], 7);
 @tag = $obj->gettoken(1);
 ok($tag[0], '</text>');
 ok($tag[1], '/text');
 ok($tag[2], 1);
-ok($tag[3], 12);
+ok($tag[3], 11);
 @tag = $obj->gettoken(1);
 ok($tag[0], "\n");
-ok($tag[1], '');
+ok($tag[1], 'data');
 ok($tag[2], 1);
-ok($tag[3], 12);
+ok($tag[3], 18);
