@@ -1,11 +1,15 @@
-$Id: TODO,v 1.2 2005-08-21 23:11:08 skim Exp $
+$Id: TODO,v 1.3 2005-08-22 00:42:26 skim Exp $
 
 TODO
 ====
-1. Preimplementovat Tag::Reader jenom v perlu.
-2. Udelat to poradne, aby to parsovalo vsechno.
 3. Prozkouset utf8.
-4.
+4. Pridat do testu subdoc.
+5.
 
 Applied
 =======
+1. Preimplementovat Tag::Reader jenom v perlu.
+OK [20050822] skim
+
+2. Udelat to poradne, aby to parsovalo vsechno.
+OK [20050822] skim
