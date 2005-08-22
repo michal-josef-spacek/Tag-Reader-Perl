@@ -1,10 +1,8 @@
-$Id: TODO,v 1.4 2005-08-22 15:34:13 skim Exp $
+$Id: TODO,v 1.5 2005-08-22 16:26:35 skim Exp $
 
 TODO
 ====
 3. Prozkouset utf8.
-4. Pridat do testu conditional.
-5. Pridat parsovani primo textu.
 6.
 
 Applied
@@ -13,4 +11,10 @@ Applied
 OK [20050822] skim
 
 2. Udelat to poradne, aby to parsovalo vsechno.
+OK [20050822] skim
+
+5. Pridat parsovani primo textu.
+OK [20050822] skim
+
+4. Pridat do testu conditional.
 OK [20050822] skim
