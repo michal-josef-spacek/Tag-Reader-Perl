@@ -12,6 +12,7 @@ t/TagReaderPerl/07_instruction.t
 t/TagReaderPerl/08_doc.t
 t/TagReaderPerl/data/comment1.tags
 t/TagReaderPerl/data/comment2.tags
+t/TagReaderPerl/data/comment3.tags
 t/TagReaderPerl/data/doc1.tags
 t/TagReaderPerl/data/end_tag1.tags
 t/TagReaderPerl/data/end_tag2.tags
