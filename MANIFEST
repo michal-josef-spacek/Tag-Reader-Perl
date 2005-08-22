@@ -10,9 +10,12 @@ t/TagReaderPerl/05_comment.t
 t/TagReaderPerl/06_tag.t
 t/TagReaderPerl/07_instruction.t
 t/TagReaderPerl/08_doc.t
+t/TagReaderPerl/09_conditional.t
 t/TagReaderPerl/data/comment1.tags
 t/TagReaderPerl/data/comment2.tags
 t/TagReaderPerl/data/comment3.tags
+t/TagReaderPerl/data/conditional1.tags
+t/TagReaderPerl/data/conditional2.tags
 t/TagReaderPerl/data/doc1.tags
 t/TagReaderPerl/data/end_tag1.tags
 t/TagReaderPerl/data/end_tag2.tags
