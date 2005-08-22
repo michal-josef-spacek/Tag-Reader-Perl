@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 package Tag::Reader::Perl;
 #------------------------------------------------------------------------------
-# $Id: Perl.pm,v 1.6 2005-08-22 00:50:38 skim Exp $
+# $Id: Perl.pm,v 1.7 2005-08-22 16:19:40 skim Exp $
 
 # Pragmas.
 use strict;
@@ -20,8 +20,8 @@ sub new {
 	my $class = shift;
 	my $self = bless {}, $class;
 
-	# Filename.
-	$self->{'filename'} = shift;
+	# Show errors.
+	$self->{'set_errors'} = 0;
 
 	# Process params.
 	while (@_) {
@@ -31,12 +31,45 @@ sub new {
 		$self->{$key} = $val;
 	}
 
-	# Check filename.
-	if (! $self->{'filename'}) {
-		err "Filename must be a string scalar.";
+	# Object.
+	return $self;
+}
+
+#------------------------------------------------------------------------------
+sub set_text {
+#------------------------------------------------------------------------------
+# Set text.
+
+	my ($self, $text, $force) = @_;
+	if (! $text) {
+		err "Bad text.";
 	}
-	if (! open(INF, "<$self->{'filename'}")) {
-		err "Can not read file \"$self->{'filename'}\".";
+	if (! $force && defined $self->{'text'}) {
+		err "Cannot set text if exists text.";
+	}
+	$self->{'text'} = $text;
+
+	# Default values.
+	$self->{'charpos'} = 0;
+	$self->{'tagcharpos'} = 0;
+	$self->{'textline'} = 1;
+	$self->{'tagline'} = 0;
+}
+
+#------------------------------------------------------------------------------
+sub set_file {
+#------------------------------------------------------------------------------
+# Set file.
+
+	my ($self, $file, $force) = @_;
+	if (! $file || ! -r $file) {
+		err "Bad file.";
+	}
+	if (! $force && defined $self->{'text'}) {
+		err "Cannot set text if exists text.";
+	}
+	if (! open(INF, "<$file")) {
+		err "Cannot read file \"$file\".";
 	}
 	foreach (<INF>) {
 		$self->{'text'} .= $_;
@@ -45,11 +78,8 @@ sub new {
 	# Default values.
 	$self->{'charpos'} = 0;
 	$self->{'tagcharpos'} = 0;
-	$self->{'fileline'} = 1;
+	$self->{'textline'} = 1;
 	$self->{'tagline'} = 0;
-
-	# Object.
-	return $self;
 }
 
 #------------------------------------------------------------------------------
@@ -57,12 +87,7 @@ sub gettoken {
 #------------------------------------------------------------------------------
 # Get tag token.
 
-	my ($self, $showerrors) = @_;
-
-	# Check file.
-	if (! $self->{'fileline'}) {
-		err "Object not initialized.";
-	}
+	my ($self, $text) = @_;
 
 	# Stay.
 	my $stay = 0;
@@ -80,7 +105,7 @@ sub gettoken {
 	my ($brace, $bracket) = (0, 0);
 
 	# Tag line.
-	$self->{'tagline'} = $self->{'fileline'};
+	$self->{'tagline'} = $self->{'textline'};
 	$self->{'tagcharpos'} = 0;
 
 	# Foreach chars.
@@ -230,7 +255,7 @@ sub gettoken {
 
 		# Next line.
 		if ($char eq "\n") {
-			$self->{'fileline'}++;
+			$self->{'textline'}++;
 			$self->{'charpos'} = 0;
 		}
 	}

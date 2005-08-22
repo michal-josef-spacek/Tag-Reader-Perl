@@ -1,10 +1,11 @@
-# $Id: 06_tag.t,v 1.2 2005-08-22 00:30:20 skim Exp $
+# $Id: 06_tag.t,v 1.3 2005-08-22 16:17:54 skim Exp $
 
 # Test directory.
 my $test_dir = "$ENV{'PWD'}/t/TagReaderPerl";
 
 print "Testing: Tags example.\n" if $debug;
-my $obj = $class->new($test_dir.'/data/tag1.tags');
+my $obj = $class->new;
+$obj->set_file($test_dir.'/data/tag1.tags');
 my @tag = $obj->gettoken(1);
 ok($tag[0], "<text>");
 ok($tag[1], "text");
