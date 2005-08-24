@@ -1,4 +1,4 @@
-# $Id: 11_attlist.t,v 1.3 2005-08-24 15:20:49 skim Exp $
+# $Id: 11_attlist.t,v 1.4 2005-08-24 15:30:58 skim Exp $
 
 # Test directory.
 my $test_dir = "$ENV{'PWD'}/t/TagReaderPerl";
@@ -42,6 +42,14 @@ $obj = $class->new;
 $obj->set_file($test_dir.'/data/attlist5.tags');
 @tag = $obj->gettoken;
 ok($tag[0], "<!ATTLIST pre xml:space (preserve) #FIXED 'preserve'>");
+ok($tag[1], '!attlist');
+ok($tag[2], 1);
+ok($tag[3], 1);
+
+$obj = $class->new;
+$obj->set_file($test_dir.'/data/attlist6.tags');
+@tag = $obj->gettoken;
+ok($tag[0], "<!ATTLIST DATE FORMAT NOTATION (USDATE|AUSDATE|ISODATE) \"ISODATE\">");
 ok($tag[1], '!attlist');
 ok($tag[2], 1);
 ok($tag[3], 1);
