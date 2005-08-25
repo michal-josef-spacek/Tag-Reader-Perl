@@ -1,4 +1,4 @@
-# $Id: 06_tag.t,v 1.4 2005-08-22 16:25:56 skim Exp $
+# $Id: 06_tag.t,v 1.5 2005-08-25 18:11:24 skim Exp $
 
 # Test directory.
 my $test_dir = "$ENV{'PWD'}/t/TagReaderPerl";
@@ -26,3 +26,72 @@ ok($tag[0], "\n");
 ok($tag[1], 'data');
 ok($tag[2], 1);
 ok($tag[3], 18);
+
+$obj = $class->new;
+$obj->set_file($test_dir.'/data/tag2.tags');
+@tag = $obj->gettoken;
+ok($tag[0], "<text:color>");
+ok($tag[1], "text:color");
+ok($tag[2], 1);
+ok($tag[3], 1);
+@tag = $obj->gettoken;
+ok($tag[0], 'text');
+ok($tag[1], 'data');
+ok($tag[2], 1);
+ok($tag[3], 13);
+@tag = $obj->gettoken;
+ok($tag[0], '</text:color>');
+ok($tag[1], '/text:color');
+ok($tag[2], 1);
+ok($tag[3], 17);
+@tag = $obj->gettoken;
+ok($tag[0], "\n");
+ok($tag[1], 'data');
+ok($tag[2], 1);
+ok($tag[3], 30);
+
+$obj = $class->new;
+$obj->set_file($test_dir.'/data/tag3.tags');
+@tag = $obj->gettoken;
+ok($tag[0], "<text>");
+ok($tag[1], "text");
+ok($tag[2], 1);
+ok($tag[3], 1);
+@tag = $obj->gettoken;
+ok($tag[0], '<![CDATA[<text>text</text>]]>');
+ok($tag[1], '![cdata[');
+ok($tag[2], 1);
+ok($tag[3], 7);
+@tag = $obj->gettoken;
+ok($tag[0], '</text>');
+ok($tag[1], '/text');
+ok($tag[2], 1);
+ok($tag[3], 36);
+@tag = $obj->gettoken;
+ok($tag[0], "\n");
+ok($tag[1], 'data');
+ok($tag[2], 1);
+ok($tag[3], 43);
+
+$obj = $class->new;
+$obj->set_file($test_dir.'/data/tag4.tags');
+@tag = $obj->gettoken;
+ok($tag[0], "<x>");
+ok($tag[1], "x");
+ok($tag[2], 1);
+ok($tag[3], 1);
+@tag = $obj->gettoken;
+ok($tag[0], '<![CDATA[a<x>b]]]>');
+ok($tag[1], '![cdata[a');
+ok($tag[2], 1);
+ok($tag[3], 4);
+@tag = $obj->gettoken;
+ok($tag[0], '</x>');
+ok($tag[1], '/x');
+ok($tag[2], 1);
+ok($tag[3], 22);
+@tag = $obj->gettoken;
+ok($tag[0], "\n");
+ok($tag[1], 'data');
+ok($tag[2], 1);
+ok($tag[3], 26);

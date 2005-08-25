@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 package Tag::Reader::Perl;
 #------------------------------------------------------------------------------
-# $Id: Perl.pm,v 1.8 2005-08-22 16:26:47 skim Exp $
+# $Id: Perl.pm,v 1.9 2005-08-25 18:11:35 skim Exp $
 
 # Pragmas.
 use strict;
@@ -187,10 +187,18 @@ sub gettoken {
 			if ($char eq '>') { 
 				if (($brace == 0 && $bracket == 0
 					&& $spec_stay < 3) 
+
+					# Comment.
 					|| ($spec_stay == 3 
 					&& join('', 
 					@{$self->{'data'}}[-2 .. -1]) 
-					eq '--')) {
+					eq '--')
+
+					# CDATA.
+					|| ($self->{'tag_type'} =~ /^!\[cdata\[/
+					&& join('', 
+					@{$self->{'data'}}[-2 .. -1]) 
+					eq ']]')) {
 
 					$stay = 98;
 					$spec_stay = 0;
