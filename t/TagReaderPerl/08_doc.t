@@ -1,4 +1,4 @@
-# $Id: 08_doc.t,v 1.5 2005-08-25 10:22:41 skim Exp $
+# $Id: 08_doc.t,v 1.6 2005-08-25 10:23:30 skim Exp $
 
 # Test directory.
 my $test_dir = "$ENV{'PWD'}/t/TagReaderPerl";
@@ -410,5 +410,3 @@ ok($tag[0], "<!ENTITY footer \"Brought to you by Jennifer Kyrnin\">");
 ok($tag[1], "!entity");
 ok($tag[2], 13);
 ok($tag[3], 3);
-
-exit 0;
