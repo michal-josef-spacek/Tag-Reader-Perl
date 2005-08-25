@@ -1,4 +1,4 @@
-# $Id: 08_doc.t,v 1.6 2005-08-25 10:23:30 skim Exp $
+# $Id: 08_doc.t,v 1.7 2005-08-25 15:10:42 skim Exp $
 
 # Test directory.
 my $test_dir = "$ENV{'PWD'}/t/TagReaderPerl";
@@ -7,7 +7,7 @@ print "Testing: Full document test.\n" if $debug;
 my $obj = $class->new;
 $obj->set_file($test_dir.'/data/doc1.tags');
 my @tag = $obj->gettoken;
-ok($tag[0], "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+ok($tag[0], "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
 ok($tag[1], "?xml");
 ok($tag[2], 1);
 ok($tag[3], 1);
@@ -15,7 +15,7 @@ ok($tag[3], 1);
 ok($tag[0], "\n");
 ok($tag[1], 'data');
 ok($tag[2], 1);
-ok($tag[3], 39);
+ok($tag[3], 56);
 @tag = $obj->gettoken;
 ok($tag[0], "<!DOCTYPE greeting [\n\t<!ELEMENT greeting (#PCDATA)>\n]>");
 ok($tag[1], "!doctype");
@@ -41,7 +41,7 @@ ok($tag[3], 24);
 $obj = $class->new;
 $obj->set_file($test_dir.'/data/doc2.tags');
 @tag = $obj->gettoken;
-ok($tag[0], "<?xml version=\"1.0\"?>");
+ok($tag[0], "<?xml version=\"1.0\" standalone=\"yes\"?>");
 ok($tag[1], "?xml");
 ok($tag[2], 1);
 ok($tag[3], 1);
