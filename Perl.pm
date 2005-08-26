@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 package Tag::Reader::Perl;
 #------------------------------------------------------------------------------
-# $Id: Perl.pm,v 1.9 2005-08-25 18:11:35 skim Exp $
+# $Id: Perl.pm,v 1.10 2005-08-26 18:49:30 skim Exp $
 
 # Pragmas.
 use strict;
@@ -209,6 +209,14 @@ sub gettoken {
 
 			# Comment.
 			} elsif ($spec_stay == 3) {
+
+				# '--' is bad.
+				if ($self->{'tag_length'} == 0
+					&& join('', @{$self->{'data'}}
+					[-2 .. -1]) eq '--') {
+
+					err "Bad tag.";
+				}
 				$self->_tag_type;
 				push @{$self->{'data'}}, $char;
 
