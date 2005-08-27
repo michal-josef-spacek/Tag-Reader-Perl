@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 package Tag::Reader::Perl;
 #------------------------------------------------------------------------------
-# $Id: Perl.pm,v 1.12 2005-08-27 17:34:51 skim Exp $
+# $Id: Perl.pm,v 1.13 2005-08-27 17:52:18 skim Exp $
 
 # Pragmas.
 use strict;
@@ -92,6 +92,7 @@ sub gettoken {
 	# Stay.
 	my $stay = 0;
 	my $spec_stay = 0;
+	my $old_stay = 0;
 	my $comment_stay = 0;
 
 	# Data.
@@ -103,6 +104,9 @@ sub gettoken {
 
 	# Braces.
 	my ($brace, $bracket) = (0, 0);
+
+	# Quote.
+	my $quote = '';
 
 	# Tag line.
 	$self->{'tagline'} = $self->{'textline'};
@@ -205,7 +209,9 @@ sub gettoken {
 					$spec_stay = 0;
 					$self->{'tag_length'} = 0;
 				}
-				$bracket--;
+				if ($spec_stay != 4) {
+					$bracket--;
+				}
 				push @{$self->{'data'}}, $char;
 
 			# Comment.
@@ -219,6 +225,14 @@ sub gettoken {
 					err "Bad tag.";
 				}
 				$self->_tag_type;
+				push @{$self->{'data'}}, $char;
+
+			# Quote.
+			} elsif ($spec_stay == 4) {
+				if ($char eq $quote) {
+					$spec_stay = $old_stay;
+					$quote = '';
+				}
 				push @{$self->{'data'}}, $char;
 
 			} elsif ($char eq ']') {
@@ -244,6 +258,16 @@ sub gettoken {
 
 			# Other characters.
 			} else {
+				if ($quote eq '' && $char eq '"') {
+					$quote = '"';
+					$old_stay = $spec_stay;
+					$spec_stay = 4;
+				}
+				if ($quote eq '' && $char eq "'") {
+					$quote = "'";
+					$old_stay = $spec_stay;
+					$spec_stay = 4;
+				}
 				if ($char eq '<') {
 					$bracket++;
 				}
