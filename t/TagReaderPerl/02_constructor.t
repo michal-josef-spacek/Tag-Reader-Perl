@@ -1,7 +1,4 @@
-# $Id: 02_constructor.t,v 1.3 2005-08-22 16:17:54 skim Exp $
-
-# Test directory.
-my $test_dir = "$ENV{'PWD'}/t/TagReaderPerl";
+# $Id: 02_constructor.t,v 1.4 2005-08-27 13:50:53 skim Exp $
 
 print "Testing: new() bad plain constructor.\n" if $debug;
 $obj = $class->new;
