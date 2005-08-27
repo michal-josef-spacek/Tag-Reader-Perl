@@ -1,4 +1,4 @@
-# $Id: 12_entity.t,v 1.1 2005-08-24 15:20:49 skim Exp $
+# $Id: 12_entity.t,v 1.2 2005-08-27 17:33:44 skim Exp $
 
 # Test directory.
 my $test_dir = "$ENV{'PWD'}/t/TagReaderPerl";
@@ -138,4 +138,12 @@ ok($tag[3], 1);
 ok($tag[0], "<!ENTITY quot   \"&#34;\">");
 ok($tag[1], '!entity');
 ok($tag[2], 5);
+ok($tag[3], 1);
+
+$obj = $class->new;
+$obj->set_file($test_dir.'/data/entity12.tags');
+@tag = $obj->gettoken;
+ok($tag[0], "<!ENTITY % zz '&#60;!ENTITY tricky \"error-prone\" >' >");
+ok($tag[1], '!entity');
+ok($tag[2], 1);
 ok($tag[3], 1);
