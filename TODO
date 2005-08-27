@@ -1,9 +1,10 @@
-$Id: TODO,v 1.5 2005-08-22 16:26:35 skim Exp $
+$Id: TODO,v 1.6 2005-08-27 17:34:16 skim Exp $
 
 TODO
 ====
 3. Prozkouset utf8.
-6.
+6. Opravit chybu v entity12.tags
+7.
 
 Applied
 =======
