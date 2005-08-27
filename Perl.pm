@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 package Tag::Reader::Perl;
 #------------------------------------------------------------------------------
-# $Id: Perl.pm,v 1.11 2005-08-27 13:28:32 skim Exp $
+# $Id: Perl.pm,v 1.12 2005-08-27 17:34:51 skim Exp $
 
 # Pragmas.
 use strict;
@@ -183,6 +183,7 @@ sub gettoken {
 
 		# Other tags.
 		} else {
+
 			# End of normal tag.
 			if ($char eq '>') { 
 				if (($brace == 0 && $bracket == 0
