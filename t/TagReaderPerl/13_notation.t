@@ -1,5 +1,3 @@
-# $Id: 13_notation.t,v 1.2 2005-08-25 10:22:41 skim Exp $
-
 # Test directory.
 my $test_dir = "$ENV{'PWD'}/t/TagReaderPerl";
 

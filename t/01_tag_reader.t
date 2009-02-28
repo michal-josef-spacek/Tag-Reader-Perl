@@ -1,5 +1,4 @@
 #!/usr/bin/env perl
-# $Id: 01_tag_reader.t,v 1.1 2005-08-20 06:02:47 skim Exp $
 
 # Pragmas.
 use strict;

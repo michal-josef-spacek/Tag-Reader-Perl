@@ -1,5 +1,3 @@
-# $Id: 04_end_tag.t,v 1.4 2005-08-22 16:25:56 skim Exp $
-
 # Test directory.
 my $test_dir = "$ENV{'PWD'}/t/TagReaderPerl";
 

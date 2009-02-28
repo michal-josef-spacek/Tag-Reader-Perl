@@ -1,5 +1,3 @@
-# $Id: 11_attlist.t,v 1.4 2005-08-24 15:30:58 skim Exp $
-
 # Test directory.
 my $test_dir = "$ENV{'PWD'}/t/TagReaderPerl";
 
