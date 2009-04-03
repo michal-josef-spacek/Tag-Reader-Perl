@@ -8,6 +8,10 @@ use warnings;
 
 # Modules.
 use Error::Simple qw(err);
+use Readonly;
+
+# Constants.
+Readonly::Scalar my $EMPTY_STR => q{};
 
 # Version.
 our $VERSION = '0.01';
@@ -103,7 +107,7 @@ sub gettoken {
 	($self->{'brace'}, $self->{'bracket'}) = (0, 0);
 
 	# Quote.
-	$self->{'quote'} = '';
+	$self->{'quote'} = $EMPTY_STR;
 
 	# Tag line.
 	$self->{'tagline'} = $self->{'textline'};
@@ -128,8 +132,8 @@ sub gettoken {
 		}
 	}
 
-	my $data = join('', @{$self->{'data'}});
-	if ($data eq '') {
+	my $data = join($EMPTY_STR, @{$self->{'data'}});
+	if ($data eq $EMPTY_STR) {
 		return ();
 	}
 	return wantarray ? ($data, $self->{'tag_type'}, $self->{'tagline'},
@@ -242,13 +246,13 @@ sub _gettoken {
 
 				# Comment.
 				|| ($self->{'spec_stay'} == 3
-				&& join('',
+				&& join($EMPTY_STR,
 				@{$self->{'data'}}[-2 .. -1])
 				eq '--')
 
 				# CDATA.
 				|| ($self->{'tag_type'} =~ /^!\[cdata\[/
-				&& join('',
+				&& join($EMPTY_STR,
 				@{$self->{'data'}}[-2 .. -1])
 				eq ']]')) {
 
@@ -266,7 +270,7 @@ sub _gettoken {
 
 			# '--' is bad.
 			if ($self->{'tag_length'} == 0
-				&& join('', @{$self->{'data'}}
+				&& join($EMPTY_STR, @{$self->{'data'}}
 				[-2 .. -1]) eq '--') {
 
 				err 'Bad tag.';
@@ -278,7 +282,7 @@ sub _gettoken {
 		} elsif ($self->{'spec_stay'} == 4) {
 			if ($self->{'char'} eq $self->{'quote'}) {
 				$self->{'spec_stay'} = $self->{'old_stay'};
-				$self->{'quote'} = '';
+				$self->{'quote'} = $EMPTY_STR;
 			}
 			push @{$self->{'data'}}, $self->{'char'};
 
@@ -305,14 +309,14 @@ sub _gettoken {
 
 		# Other characters.
 		} else {
-			if ($self->{'quote'} eq ''
+			if ($self->{'quote'} eq $EMPTY_STR
 				&& $self->{'char'} eq '"') {
 
 				$self->{'quote'} = '"';
 				$self->{'old_stay'} = $self->{'spec_stay'};
 				$self->{'spec_stay'} = 4;
 			}
-			if ($self->{'quote'} eq ''
+			if ($self->{'quote'} eq $EMPTY_STR
 				&& $self->{'char'} eq "'") {
 
 				$self->{'quote'} = "'";
@@ -395,7 +399,7 @@ sub _tag_type {
 	my $self = shift;
 	if ($self->{'tag_length'} > 0) {
 		$self->{'tag_type'}
-			= lc(join('', @{$self->{'data'}}
+			= lc(join($EMPTY_STR, @{$self->{'data'}}
 			[1 .. $self->{'tag_length'} - 1]));
 		$self->{'tag_length'} = 0;
 	}
