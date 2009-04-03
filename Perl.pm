@@ -44,12 +44,12 @@ sub set_text {
 
 	my ($self, $text, $force) = @_;
 	if (! $text) {
-		err "Bad text.";
+		err 'Bad text.';
 	}
 	if (! $force && (defined $self->{'text'} 
 		|| defined $self->{'filename'})) {
 
-		err "Cannot set new data if exists data.";
+		err 'Cannot set new data if exists data.';
 	}
 	$self->{'text'} = $text;
 
@@ -64,12 +64,12 @@ sub set_file {
 
 	my ($self, $file, $force) = @_;
 	if (! $file || ! -r $file) {
-		err "Bad file.";
+		err 'Bad file.';
 	}
 	if (! $force && (defined $self->{'text'} 
 		|| defined $self->{'filename'})) {
 
-		err "Cannot set new data if exists data.";
+		err 'Cannot set new data if exists data.';
 	}
 	if (! open(INF, "<$file")) {
 		err "Cannot open file '$file'.";
@@ -224,7 +224,7 @@ sub _gettoken {
 				if ($self->{'tag_length'} == 1 
 					|| $self->{'char'} eq '<') {
 
-					err "Bad tag.";
+					err 'Bad tag.';
 				}
 				$self->_tag_type;
 				push @{$self->{'data'}}, $self->{'char'};
@@ -269,7 +269,7 @@ sub _gettoken {
 				&& join('', @{$self->{'data'}}
 				[-2 .. -1]) eq '--') {
 
-				err "Bad tag.";
+				err 'Bad tag.';
 			}
 			$self->_tag_type;
 			push @{$self->{'data'}}, $self->{'char'};
