@@ -183,7 +183,7 @@ sub _gettoken {
 
 			# In tag.
 			if ($#{$self->{'data'}} == -1) {
-				$self->{'tagcharpos'} 
+				$self->{'tagcharpos'}
 					= $self->{'charpos'};
 				$self->{'stay'} = 1;
 				push @{$self->{'data'}}, $self->{'char'};
