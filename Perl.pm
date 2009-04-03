@@ -46,7 +46,7 @@ sub set_text {
 	if (! $text) {
 		err 'Bad text.';
 	}
-	if (! $force && (defined $self->{'text'} 
+	if (! $force && (defined $self->{'text'}
 		|| defined $self->{'filename'})) {
 
 		err 'Cannot set new data if exists data.';
@@ -66,7 +66,7 @@ sub set_file {
 	if (! $file || ! -r $file) {
 		err 'Bad file.';
 	}
-	if (! $force && (defined $self->{'text'} 
+	if (! $force && (defined $self->{'text'}
 		|| defined $self->{'filename'})) {
 
 		err 'Cannot set new data if exists data.';
@@ -110,18 +110,18 @@ sub gettoken {
 	$self->{'tagcharpos'} = 0;
 
 	if (exists $self->{'text'}) {
-		while (exists $self->{'text'} 
+		while (exists $self->{'text'}
 			&& $self->{'stay'} < 98
-			&& defined ($self->{'char'} 
-			= substr($self->{'text'}, 0, 1))) { 
+			&& defined ($self->{'char'}
+			= substr($self->{'text'}, 0, 1))) {
 
 			$self->_gettoken;
 		}
 	} elsif (exists $self->{'filename'}) {
-		while ($self->{'stay'} < 98 
-			&& ((defined ($self->{'char'} 
-			= shift @{$self->{'old_data'}})) 
-			|| (defined ($self->{'char'} 
+		while ($self->{'stay'} < 98
+			&& ((defined ($self->{'char'}
+			= shift @{$self->{'old_data'}}))
+			|| (defined ($self->{'char'}
 			= getc($self->{'filename'}))))) {
 
 			$self->_gettoken;
@@ -132,7 +132,7 @@ sub gettoken {
 	if ($data eq '') {
 		return ();
 	}
-	return wantarray ? ($data, $self->{'tag_type'}, $self->{'tagline'}, 
+	return wantarray ? ($data, $self->{'tag_type'}, $self->{'tagline'},
 		$self->{'tagcharpos'}) : $data;
 }
 
@@ -188,7 +188,7 @@ sub _gettoken {
 		} elsif ($self->{'stay'} == 0) {
 			push @{$self->{'data'}}, $self->{'char'};
 			if ($self->{'tagcharpos'} == 0) {
-				$self->{'tagcharpos'} 
+				$self->{'tagcharpos'}
 					= $self->{'charpos'};
 			}
 
@@ -203,7 +203,7 @@ sub _gettoken {
 				$self->{'tag_length'} = 0;
 
 			# First charcter after '<' in normal tag.
-			} elsif ($self->{'tag_length'} == 1 
+			} elsif ($self->{'tag_length'} == 1
 				&& _is_first_char_of_tag($self->{'char'})) {
 
 				if ($self->{'char'} eq '!') {
@@ -221,7 +221,7 @@ sub _gettoken {
 
 			# Other characters.
 			} else {
-				if ($self->{'tag_length'} == 1 
+				if ($self->{'tag_length'} == 1
 					|| $self->{'char'} eq '<') {
 
 					err 'Bad tag.';
@@ -235,21 +235,21 @@ sub _gettoken {
 	} else {
 
 		# End of normal tag.
-		if ($self->{'char'} eq '>') { 
-			if (($self->{'brace'} == 0 
+		if ($self->{'char'} eq '>') {
+			if (($self->{'brace'} == 0
 				&& $self->{'bracket'} == 0
-				&& $self->{'spec_stay'} < 3) 
+				&& $self->{'spec_stay'} < 3)
 
 				# Comment.
-				|| ($self->{'spec_stay'} == 3 
-				&& join('', 
-				@{$self->{'data'}}[-2 .. -1]) 
+				|| ($self->{'spec_stay'} == 3
+				&& join('',
+				@{$self->{'data'}}[-2 .. -1])
 				eq '--')
 
 				# CDATA.
 				|| ($self->{'tag_type'} =~ /^!\[cdata\[/
-				&& join('', 
-				@{$self->{'data'}}[-2 .. -1]) 
+				&& join('',
+				@{$self->{'data'}}[-2 .. -1])
 				eq ']]')) {
 
 				$self->{'stay'} = 98;
@@ -305,14 +305,14 @@ sub _gettoken {
 
 		# Other characters.
 		} else {
-			if ($self->{'quote'} eq '' 
+			if ($self->{'quote'} eq ''
 				&& $self->{'char'} eq '"') {
 
 				$self->{'quote'} = '"';
 				$self->{'old_stay'} = $self->{'spec_stay'};
 				$self->{'spec_stay'} = 4;
 			}
-			if ($self->{'quote'} eq '' 
+			if ($self->{'quote'} eq ''
 				&& $self->{'char'} eq "'") {
 
 				$self->{'quote'} = "'";
@@ -340,10 +340,10 @@ sub _gettoken {
 			}
 		}
 	} else {
-		if (exists $self->{'filename'} 
+		if (exists $self->{'filename'}
 			&& defined $self->{'char'}) {
 
-			push @{$self->{'old_data'}}, $self->{'char'}; 
+			push @{$self->{'old_data'}}, $self->{'char'};
 		}
 	}
 	if ($self->{'stay'} == 98 || $self->{'stay'} == 99) {
@@ -365,7 +365,7 @@ sub _is_first_char_of_tag {
 # First character in tag.
 
 	my $char = shift;
-	if ($char eq '!' || $char eq '/' || $char eq '?' 
+	if ($char eq '!' || $char eq '/' || $char eq '?'
 		|| $char =~ /^[\d\w]+$/) {
 
 		return 1;
@@ -394,7 +394,7 @@ sub _tag_type {
 
 	my $self = shift;
 	if ($self->{'tag_length'} > 0) {
-		$self->{'tag_type'} 
+		$self->{'tag_type'}
 			= lc(join('', @{$self->{'data'}}
 			[1 .. $self->{'tag_length'} - 1]));
 		$self->{'tag_length'} = 0;
