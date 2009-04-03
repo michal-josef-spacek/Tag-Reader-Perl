@@ -77,10 +77,11 @@ sub set_file {
 
 		err 'Cannot set new data if exists data.';
 	}
-	if (! open(INF, "<$file")) {
+	my $inf;
+	if (! open $inf, '<', $file) {
 		err "Cannot open file '$file'.";
 	}
-	$self->{'filename'} = *INF;
+	$self->{'filename'} = $inf;
 
 	# Reset values.
 	$self->_reset;
