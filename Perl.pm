@@ -257,7 +257,7 @@ sub _gettoken {
 				eq '--')
 
 				# CDATA.
-				|| ($self->{'tag_type'} =~ /^!\[cdata\[/
+				|| ($self->{'tag_type'} =~ /^!\[cdata\[/ms
 				&& join($EMPTY_STR,
 				@{$self->{'data'}}[-2 .. -1])
 				eq ']]')) {
@@ -378,7 +378,7 @@ sub _is_first_char_of_tag {
 
 	my $char = shift;
 	if ($char eq '!' || $char eq '/' || $char eq '?'
-		|| $char =~ /^[\d\w]+$/) {
+		|| $char =~ /^[\d\w]+$/ms) {
 
 		return 1;
 	}
@@ -392,7 +392,7 @@ sub _is_in_tag_name {
 
 	my $char = shift;
 	if ($char eq ':' || $char eq '[' || $char eq '-' || $char eq '%'
-		|| $char =~ /^[\d\w]+$/) {
+		|| $char =~ /^[\d\w]+$/ms) {
 
 		return 1;
 	}
