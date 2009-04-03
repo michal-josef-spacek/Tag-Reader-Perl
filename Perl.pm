@@ -183,7 +183,7 @@ sub _gettoken {
 
 			# In tag.
 			if ($#{$self->{'data'}} == -1) {
-				$self->{'tagcharpos'} 	
+				$self->{'tagcharpos'} 
 					= $self->{'charpos'};
 				$self->{'stay'} = 1;
 				push @{$self->{'data'}}, $self->{'char'};
@@ -304,7 +304,7 @@ sub _gettoken {
 			if (($self->{'tag_length'} == 2
 				|| $self->{'tag_length'} == 3)
 				&& $self->{'char'} eq '-') {
-			
+
 				$self->{'spec_stay'}++;
 			}
 			if ($self->{'char'} eq '[') {
