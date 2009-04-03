@@ -4,6 +4,7 @@ package Tag::Reader::Perl;
 
 # Pragmas.
 use strict;
+use warnings;
 
 # Modules.
 use Error::Simple qw(err);
