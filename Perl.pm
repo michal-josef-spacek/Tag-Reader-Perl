@@ -417,3 +417,87 @@ sub _tag_type {
 
 1;
 
+__END__
+
+=pod
+
+=encoding utf8
+
+=head1 NAME
+
+ Tags::Reader::Perl - TODO
+
+=head1 SYNOPSIS
+
+ TODO
+
+=head1 METHODS
+
+=over 8
+
+=item B<new(%params)>
+
+ Constructor.
+
+=over 8
+
+=item * B<set_errors>
+
+ TODO
+
+=back
+
+=item B<set_text($file[, $force])>
+
+ TODO
+
+=item B<set_file($file[, $force])>
+
+ TODO
+
+=item B<gettoken()>
+
+ TODO
+
+=back
+
+=head1 ERRORS
+
+ TODO
+
+=head1 EXAMPLE1
+
+ # Pragmas.
+ use strict;
+ use warnings;
+
+ # Modules.
+ use Tag::Reader::Perl;
+
+ # Object.
+ my $reader = Tag::Reader::Perl->new;
+
+ TODO
+
+=head1 DEPENDENCIES
+
+L<Error::Simple::Multiple(3pm)>,
+L<Readonly(3pm)>,
+
+=head1 SEE ALSO
+
+L<Tag::Reader(3pm)>,
+
+=head1 AUTHOR
+
+ Michal Špaček L<tupinek@gmail.com>
+
+=head1 LICENSE AND COPYRIGHT
+
+ BSD license.
+
+=head1 VERSION
+
+ 0.01
+
+=cut
