@@ -122,7 +122,7 @@ sub gettoken {
 		while (exists $self->{'text'}
 			&& $self->{'stay'} < 98
 			&& defined ($self->{'char'}
-			= substr($self->{'text'}, 0, 1))) {
+			= substr $self->{'text'}, 0, 1)) {
 
 			$self->_gettoken;
 		}
@@ -130,14 +130,14 @@ sub gettoken {
 		while ($self->{'stay'} < 98
 			&& ((defined ($self->{'char'}
 			= shift @{$self->{'old_data'}}))
-			|| (defined ($self->{'char'}
-			= getc($self->{'filename'}))))) {
+			|| defined ($self->{'char'}
+			= getc $self->{'filename'}))) {
 
 			$self->_gettoken;
 		}
 	}
 
-	my $data = join($EMPTY_STR, @{$self->{'data'}});
+	my $data = join $EMPTY_STR, @{$self->{'data'}};
 	if ($data eq $EMPTY_STR) {
 		return ();
 	}
@@ -345,7 +345,7 @@ sub _gettoken {
 	if ($self->{'stay'} != 99) {
 		if (exists $self->{'text'}) {
 			if (length $self->{'text'} > 1) {
-				$self->{'text'} = substr($self->{'text'}, 1);
+				$self->{'text'} = substr $self->{'text'}, 1;
 			} else {
 				delete $self->{'text'};
 			}
@@ -408,8 +408,8 @@ sub _tag_type {
 	my $self = shift;
 	if ($self->{'tag_length'} > 0) {
 		$self->{'tag_type'}
-			= lc(join($EMPTY_STR, @{$self->{'data'}}
-			[1 .. $self->{'tag_length'} - 1]));
+			= lc join$EMPTY_STR, @{$self->{'data'}}
+			[1 .. $self->{'tag_length'} - 1];
 		$self->{'tag_length'} = 0;
 	}
 	return;
