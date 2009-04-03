@@ -27,7 +27,9 @@ sub new {
 	while (@params) {
 		my $key = shift @params;
 		my $val = shift @params;
-		err "Unknown parameter '$key'." if ! exists $self->{$key};
+		if (! exists $self->{$key}) {
+			err "Unknown parameter '$key'.";
+		}
 		$self->{$key} = $val;
 	}
 
@@ -127,7 +129,9 @@ sub gettoken {
 	}
 
 	my $data = join('', @{$self->{'data'}});
-	return () if $data eq '';
+	if ($data eq '') {
+		return ();
+	}
 	return wantarray ? ($data, $self->{'tag_type'}, $self->{'tagline'}, 
 		$self->{'tagcharpos'}) : $data;
 }
