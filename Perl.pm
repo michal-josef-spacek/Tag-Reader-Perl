@@ -216,7 +216,7 @@ sub _gettoken {
 			} elsif ($self->{'tag_length'} == 1
 				&& _is_first_char_of_tag($self->{'char'})) {
 
-				if ($self->{'char'} eq '!') {
+				if ($self->{'char'} eq q{!}) {
 					$self->{'spec_stay'} = 1;
 				}
 				push @{$self->{'data'}}, $self->{'char'};
@@ -254,7 +254,7 @@ sub _gettoken {
 				|| ($self->{'spec_stay'} == 3
 				&& join($EMPTY_STR,
 				@{$self->{'data'}}[-2 .. -1])
-				eq '--')
+				eq q{--})
 
 				# CDATA.
 				|| ($self->{'tag_type'} =~ /^!\[cdata\[/ms
@@ -277,7 +277,7 @@ sub _gettoken {
 			# '--' is bad.
 			if ($self->{'tag_length'} == 0
 				&& join($EMPTY_STR, @{$self->{'data'}}
-				[-2 .. -1]) eq '--') {
+				[-2 .. -1]) eq q{--}) {
 
 				err 'Bad tag.';
 			}
@@ -303,7 +303,7 @@ sub _gettoken {
 			# Comment detect.
 			if (($self->{'tag_length'} == 2
 				|| $self->{'tag_length'} == 3)
-				&& $self->{'char'} eq '-') {
+				&& $self->{'char'} eq q{-}) {
 
 				$self->{'spec_stay'}++;
 			}
@@ -316,16 +316,16 @@ sub _gettoken {
 		# Other characters.
 		} else {
 			if ($self->{'quote'} eq $EMPTY_STR
-				&& $self->{'char'} eq '"') {
+				&& $self->{'char'} eq q{"}) {
 
-				$self->{'quote'} = '"';
+				$self->{'quote'} = q{"};
 				$self->{'old_stay'} = $self->{'spec_stay'};
 				$self->{'spec_stay'} = 4;
 			}
 			if ($self->{'quote'} eq $EMPTY_STR
-				&& $self->{'char'} eq "'") {
+				&& $self->{'char'} eq q{'}) {
 
-				$self->{'quote'} = "'";
+				$self->{'quote'} = q{'};
 				$self->{'old_stay'} = $self->{'spec_stay'};
 				$self->{'spec_stay'} = 4;
 			}
@@ -377,7 +377,7 @@ sub _is_first_char_of_tag {
 # First character in tag.
 
 	my $char = shift;
-	if ($char eq '!' || $char eq '/' || $char eq '?'
+	if ($char eq q{!} || $char eq q{/} || $char eq q{?}
 		|| $char =~ /^[\d\w]+$/ms) {
 
 		return 1;
@@ -391,7 +391,7 @@ sub _is_in_tag_name {
 # Normal characters in a tag name.
 
 	my $char = shift;
-	if ($char eq ':' || $char eq '[' || $char eq '-' || $char eq '%'
+	if ($char eq q{:} || $char eq '[' || $char eq q{-} || $char eq q{%}
 		|| $char =~ /^[\d\w]+$/ms) {
 
 		return 1;
