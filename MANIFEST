@@ -69,15 +69,3 @@ t/Tag::Reader::Perl/data/tag1.tags
 t/Tag::Reader::Perl/data/tag2.tags
 t/Tag::Reader::Perl/data/tag3.tags
 t/Tag::Reader::Perl/data/tag4.tags
-t/TagReaderPerl/02_constructor.t
-t/TagReaderPerl/03_start_tag.t
-t/TagReaderPerl/04_end_tag.t
-t/TagReaderPerl/05_comment.t
-t/TagReaderPerl/06_tag.t
-t/TagReaderPerl/07_instruction.t
-t/TagReaderPerl/08_doc.t
-t/TagReaderPerl/09_conditional.t
-t/TagReaderPerl/10_element.t
-t/TagReaderPerl/11_attlist.t
-t/TagReaderPerl/12_entity.t
-t/TagReaderPerl/13_notation.t
