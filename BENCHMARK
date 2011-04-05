@@ -1,0 +1,8 @@
+Benchmark
+=========
+1. Tag::Reader::Perl->tokenizer.pl 
+   8.50 user time
+2. Tag::Reader::Perl->tokenizer_text.pl
+   43.84 user time
+3. Tag::Reader->tokenizer.pl
+   0.43
