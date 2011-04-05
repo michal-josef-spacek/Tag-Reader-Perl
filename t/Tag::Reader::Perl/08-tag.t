@@ -1,13 +1,17 @@
 # Modules.
+use File::Object;
 use Tag::Reader::Perl;
 use Test::More 'tests' => 64;
 
-# Test directory.
-my $test_dir = "$ENV{'PWD'}/t/Tag::Reader::Perl";
+# Directories.
+my $data_dir = File::Object->new->up->dir('data')->serialize;
 
+# Debug message.
 print "Testing: Tags example.\n";
+
+# Test.
 my $obj = Tag::Reader::Perl->new;
-$obj->set_file($test_dir.'/data/tag1.tags');
+$obj->set_file($data_dir.'/tag1.tags');
 my @tag = $obj->gettoken;
 is($tag[0], "<text>");
 is($tag[1], "text");
@@ -29,8 +33,9 @@ is($tag[1], 'data');
 is($tag[2], 1);
 is($tag[3], 18);
 
+# Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($test_dir.'/data/tag2.tags');
+$obj->set_file($data_dir.'/tag2.tags');
 @tag = $obj->gettoken;
 is($tag[0], "<text:color>");
 is($tag[1], "text:color");
@@ -52,8 +57,9 @@ is($tag[1], 'data');
 is($tag[2], 1);
 is($tag[3], 30);
 
+# Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($test_dir.'/data/tag3.tags');
+$obj->set_file($data_dir.'/tag3.tags');
 @tag = $obj->gettoken;
 is($tag[0], "<text>");
 is($tag[1], "text");
@@ -75,8 +81,9 @@ is($tag[1], 'data');
 is($tag[2], 1);
 is($tag[3], 43);
 
+# Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($test_dir.'/data/tag4.tags');
+$obj->set_file($data_dir.'/tag4.tags');
 @tag = $obj->gettoken;
 is($tag[0], "<x>");
 is($tag[1], "x");

@@ -1,29 +1,35 @@
 # Modules.
+use File::Object;
 use Tag::Reader::Perl;
 use Test::More 'tests' => 12;
 
-# Test directory.
-my $test_dir = "$ENV{'PWD'}/t/Tag::Reader::Perl";
+# Directories.
+my $data_dir = File::Object->new->up->dir('data')->serialize;
 
+# Debug message.
 print "Testing: Comment tag.\n";
+
+# Test.
 my $obj = Tag::Reader::Perl->new;
-$obj->set_file($test_dir.'/data/comment1.tags');
+$obj->set_file($data_dir.'/comment1.tags');
 my @tag = $obj->gettoken;
 is($tag[0], "<!-- comment -->");
 is($tag[1], "!--");
 is($tag[2], 1);
 is($tag[3], 1);
 
+# Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($test_dir.'/data/comment2.tags');
+$obj->set_file($data_dir.'/comment2.tags');
 @tag = $obj->gettoken;
 is($tag[0], "<!-- <tag> text </tag> -->");
 is($tag[1], "!--");
 is($tag[2], 1);
 is($tag[3], 1);
 
+# Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($test_dir.'/data/comment3.tags');
+$obj->set_file($data_dir.'/comment3.tags');
 @tag = $obj->gettoken;
 is($tag[0], "<!-- <<<< comment <> -->");
 is($tag[1], "!--");
