@@ -1,9 +1,9 @@
-# Test directory.
-my $test_dir = "$ENV{'PWD'}/t/Tag::Reader::Perl";
-
 # Modules.
 use Tag::Reader::Perl;
 use Test::More 'tests' => 76;
+
+# Test directory.
+my $test_dir = "$ENV{'PWD'}/t/Tag::Reader::Perl";
 
 print "Testing: Entity test.\n";
 my $obj = Tag::Reader::Perl->new;
