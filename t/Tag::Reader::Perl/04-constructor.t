@@ -1,7 +1,7 @@
 # Modules.
 use English qw(-no_match_vars);
 use Tag::Reader::Perl;
-use Test::More 'tests' => 4;
+use Test::More 'tests' => 3;
 
 # Test.
 eval {
@@ -17,5 +17,4 @@ is($EVAL_ERROR, "Unknown parameter 'something'.\n");
 
 # Test.
 my $obj = Tag::Reader::Perl->new;
-ok(defined $obj);
-ok($obj->isa('Tag::Reader::Perl'));
+isa_ok($obj, 'Tag::Reader::Perl');
