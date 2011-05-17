@@ -6,9 +6,6 @@ use Test::More 'tests' => 64;
 # Directories.
 my $data_dir = File::Object->new->up->dir('data')->serialize;
 
-# Debug message.
-print "Testing: Tags example.\n";
-
 # Test.
 my $obj = Tag::Reader::Perl->new;
 $obj->set_file($data_dir.'/tag1.tags');

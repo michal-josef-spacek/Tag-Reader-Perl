@@ -6,9 +6,6 @@ use Test::More 'tests' => 76;
 # Directories.
 my $data_dir = File::Object->new->up->dir('data')->serialize;
 
-# Debug message.
-print "Testing: Entity test.\n";
-
 # Test.
 my $obj = Tag::Reader::Perl->new;
 $obj->set_file($data_dir.'/entity1.tags');

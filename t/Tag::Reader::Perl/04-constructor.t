@@ -3,9 +3,6 @@ use English qw(-no_match_vars);
 use Tag::Reader::Perl;
 use Test::More 'tests' => 4;
 
-# Debug message.
-print "Testing: Constructor.\n";
-
 # Test.
 eval {
 	Tag::Reader::Perl->new('');
