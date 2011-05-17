@@ -6,7 +6,7 @@ WriteMakefile(
 	'NAME' => 'Tag::Reader::Perl',
 	'PREREQ_PM' => {
 		'Class::Utils' => 0.01,
-		'Error::Simple::Multiple' => 0.05,
+		'Error::Pure' => 0.01,
 		'File::Object' => 0,
 	},
 	'VERSION_FROM' => 'Perl.pm',

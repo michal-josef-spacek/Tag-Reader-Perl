@@ -6,7 +6,7 @@ use warnings;
 
 # Modules.
 use Class::Utils qw(set_params);
-use Error::Simple::Multiple qw(err);
+use Error::Pure qw(err);
 use Readonly;
 
 # Constants.
