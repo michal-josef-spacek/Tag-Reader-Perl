@@ -5,6 +5,7 @@ use strict;
 use warnings;
 
 # Modules.
+use Class::Utils qw(set_params);
 use Error::Simple::Multiple qw(err);
 use Readonly;
 
@@ -23,14 +24,7 @@ sub new {
 	$self->{'set_errors'} = 0;
 
 	# Process params.
-	while (@params) {
-		my $key = shift @params;
-		my $val = shift @params;
-		if (! exists $self->{$key}) {
-			err "Unknown parameter '$key'.";
-		}
-		$self->{$key} = $val;
-	}
+	set_params($self, @params);
 
 	# Object.
 	return $self;
@@ -448,6 +442,7 @@ __END__
 
 =head1 DEPENDENCIES
 
+L<Class::Utils(3pm)>,
 L<Error::Simple::Multiple(3pm)>,
 L<Readonly(3pm)>,
 
