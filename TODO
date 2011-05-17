@@ -3,7 +3,8 @@ TODO
 3. Prozkouset utf8.
 7. Je to _brutalne_ pomale. 
 8. Dokumentace.
-9.
+9. Predelat testy na is_deeply().
+10.
 
 Applied
 =======
