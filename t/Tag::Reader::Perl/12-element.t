@@ -8,11 +8,11 @@ use Tag::Reader::Perl;
 use Test::More 'tests' => 40;
 
 # Directories.
-my $data_dir = File::Object->new->up->dir('data')->serialize;
+my $data_dir = File::Object->new->up->dir('data');
 
 # Test.
 my $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/element1.tags');
+$obj->set_file($data_dir->file('element1.tags')->s);
 my @tag = $obj->gettoken;
 is($tag[0], '<!ELEMENT br EMPTY>');
 is($tag[1], '!element');
@@ -21,7 +21,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/element2.tags');
+$obj->set_file($data_dir->file('element2.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], '<!ELEMENT p (#PCDATA|emph)* >');
 is($tag[1], '!element');
@@ -30,7 +30,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/element3.tags');
+$obj->set_file($data_dir->file('element3.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], '<!ELEMENT %name.para; %content.para; >');
 is($tag[1], '!element');
@@ -39,7 +39,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/element4.tags');
+$obj->set_file($data_dir->file('element4.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], '<!ELEMENT container ANY>');
 is($tag[1], '!element');
@@ -48,7 +48,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/element5.tags');
+$obj->set_file($data_dir->file('element5.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], '<!ELEMENT spec (front, body, back?)>');
 is($tag[1], '!element');
@@ -57,7 +57,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/element6.tags');
+$obj->set_file($data_dir->file('element6.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], '<!ELEMENT div1 (head, (p | list | note)*, div2)>');
 is($tag[1], '!element');
@@ -66,7 +66,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/element7.tags');
+$obj->set_file($data_dir->file('element7.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], '<!ELEMENT dictionary-body (%div.mix; | %dict.mix;)*>');
 is($tag[1], '!element');
@@ -75,7 +75,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/element8.tags');
+$obj->set_file($data_dir->file('element8.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], '<!ELEMENT p (#PCDATA|a|ul|b|i|em)*>');
 is($tag[1], '!element');
@@ -84,7 +84,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/element9.tags');
+$obj->set_file($data_dir->file('element9.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], '<!ELEMENT p (#PCDATA | %font; | %phrase; | %special; | %form;)* >');
 is($tag[1], '!element');
@@ -93,7 +93,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/element10.tags');
+$obj->set_file($data_dir->file('element10.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], '<!ELEMENT b (#PCDATA)>');
 is($tag[1], '!element');

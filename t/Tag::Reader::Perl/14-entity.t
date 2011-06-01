@@ -8,11 +8,11 @@ use Tag::Reader::Perl;
 use Test::More 'tests' => 76;
 
 # Directories.
-my $data_dir = File::Object->new->up->dir('data')->serialize;
+my $data_dir = File::Object->new->up->dir('data');
 
 # Test.
 my $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/entity1.tags');
+$obj->set_file($data_dir->file('entity1.tags')->s);
 my @tag = $obj->gettoken;
 is($tag[0], "<!ENTITY d \"&#xD;\">");
 is($tag[1], '!entity');
@@ -21,7 +21,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/entity2.tags');
+$obj->set_file($data_dir->file('entity2.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<!ENTITY a \"&#xA;\">");
 is($tag[1], '!entity');
@@ -30,7 +30,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/entity3.tags');
+$obj->set_file($data_dir->file('entity3.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<!ENTITY da \"&#xD;&#xA;\">");
 is($tag[1], '!entity');
@@ -39,7 +39,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/entity4.tags');
+$obj->set_file($data_dir->file('entity4.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<!ENTITY % ISOLat2\n         SYSTEM ".
 	"\"http://www.xml.com/iso/isolatin2-xml.entities\" >");
@@ -49,7 +49,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/entity5.tags');
+$obj->set_file($data_dir->file('entity5.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<!ENTITY Pub-Status \"This is a pre-release of the specification.\">");
 is($tag[1], '!entity');
@@ -58,7 +58,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/entity6.tags');
+$obj->set_file($data_dir->file('entity6.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<!ENTITY open-hatch\n         SYSTEM ".
 	"\"http://www.textuality.com/boilerplate/OpenHatch.xml\">");
@@ -68,7 +68,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/entity7.tags');
+$obj->set_file($data_dir->file('entity7.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<!ENTITY open-hatch\n         PUBLIC \"-//Textuality//TEXT ".
 	"Standard open-hatch boilerplate//EN\"\n".
@@ -79,7 +79,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/entity8.tags');
+$obj->set_file($data_dir->file('entity8.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<!ENTITY hatch-pic\n         SYSTEM \"../grafix/OpenHatch.gif\"".
 	"\n         NDATA gif >");
@@ -89,7 +89,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/entity9.tags');
+$obj->set_file($data_dir->file('entity9.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<!ENTITY % YN '\"Yes\"' >");
 is($tag[1], '!entity');
@@ -104,7 +104,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/entity10.tags');
+$obj->set_file($data_dir->file('entity10.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<!ENTITY % pub    \"&#xc9;ditions Gallimard\" >");
 is($tag[1], '!entity');
@@ -126,7 +126,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/entity11.tags');
+$obj->set_file($data_dir->file('entity11.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<!ENTITY lt     \"&#38;#60;\">");
 is($tag[1], '!entity');
@@ -159,7 +159,7 @@ is($tag[3], 1);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/entity12.tags');
+$obj->set_file($data_dir->file('entity12.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<!ENTITY % zz '&#60;!ENTITY tricky \"error-prone\" >' >");
 is($tag[1], '!entity');

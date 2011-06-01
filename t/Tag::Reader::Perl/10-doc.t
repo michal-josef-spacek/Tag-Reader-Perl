@@ -8,11 +8,11 @@ use Tag::Reader::Perl;
 use Test::More 'tests' => 248;
 
 # Directories.
-my $data_dir = File::Object->new->up->dir('data')->serialize;
+my $data_dir = File::Object->new->up->dir('data');
 
 # Test.
 my $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/doc1.tags');
+$obj->set_file($data_dir->file('doc1.tags')->s);
 my @tag = $obj->gettoken;
 is($tag[0], "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
 is($tag[1], "?xml");
@@ -47,7 +47,7 @@ is($tag[3], 24);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/doc2.tags');
+$obj->set_file($data_dir->file('doc2.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<?xml version=\"1.0\" standalone=\"yes\"?>");
 is($tag[1], "?xml");
@@ -98,7 +98,7 @@ is($tag[3], 3);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/doc3.tags');
+$obj->set_file($data_dir->file('doc3.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<?xml version=\"1.0\" standalone=\"yes\"?>");
 is($tag[1], "?xml");
@@ -218,7 +218,7 @@ is($tag[3], 3);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/doc4.tags');
+$obj->set_file($data_dir->file('doc4.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<?xml version=\"1.0\" standalone=\"yes\"?>");
 is($tag[1], "?xml");

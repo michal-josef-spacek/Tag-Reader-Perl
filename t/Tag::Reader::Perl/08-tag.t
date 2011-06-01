@@ -8,11 +8,11 @@ use Tag::Reader::Perl;
 use Test::More 'tests' => 64;
 
 # Directories.
-my $data_dir = File::Object->new->up->dir('data')->serialize;
+my $data_dir = File::Object->new->up->dir('data');
 
 # Test.
 my $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/tag1.tags');
+$obj->set_file($data_dir->file('tag1.tags')->s);
 my @tag = $obj->gettoken;
 is($tag[0], "<text>");
 is($tag[1], "text");
@@ -36,7 +36,7 @@ is($tag[3], 18);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/tag2.tags');
+$obj->set_file($data_dir->file('tag2.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<text:color>");
 is($tag[1], "text:color");
@@ -60,7 +60,7 @@ is($tag[3], 30);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/tag3.tags');
+$obj->set_file($data_dir->file('tag3.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<text>");
 is($tag[1], "text");
@@ -84,7 +84,7 @@ is($tag[3], 43);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir.'/tag4.tags');
+$obj->set_file($data_dir->file('tag4.tags')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<x>");
 is($tag[1], "x");
