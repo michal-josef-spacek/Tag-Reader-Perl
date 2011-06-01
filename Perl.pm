@@ -369,7 +369,7 @@ sub _tag_type {
 	my $self = shift;
 	if ($self->{'tag_length'} > 0) {
 		$self->{'tag_type'}
-			= lc join$EMPTY_STR, @{$self->{'data'}}
+			= lc join $EMPTY_STR, @{$self->{'data'}}
 			[1 .. $self->{'tag_length'} - 1];
 		$self->{'tag_length'} = 0;
 	}
