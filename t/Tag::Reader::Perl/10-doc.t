@@ -5,7 +5,7 @@ use warnings;
 # Modules.
 use File::Object;
 use Tag::Reader::Perl;
-use Test::More 'tests' => 248;
+use Test::More 'tests' => 62;
 
 # Directories.
 my $data_dir = File::Object->new->up->dir('data');
@@ -14,45 +14,81 @@ my $data_dir = File::Object->new->up->dir('data');
 my $obj = Tag::Reader::Perl->new;
 $obj->set_file($data_dir->file('doc1.tags')->s);
 my @tag = $obj->gettoken;
-is($tag[0], "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
-is($tag[1], "?xml");
-is($tag[2], 1);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		"<?xml version=\"1.0\" encoding=\"UTF-8\" ".
+			"standalone=\"yes\"?>",
+		'?xml',
+		1,
+		1,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "\n");
-is($tag[1], 'data');
-is($tag[2], 1);
-is($tag[3], 56);
+is_deeply(
+	\@tag,
+	[
+		"\n",
+		'data',
+		1,
+		56,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "<!DOCTYPE greeting [\n\t<!ELEMENT greeting (#PCDATA)>\n]>");
-is($tag[1], "!doctype");
-is($tag[2], 2);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		"<!DOCTYPE greeting [\n\t<!ELEMENT greeting (#PCDATA)>\n]>",
+		'!doctype',
+		2,
+		1,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<greeting>");
-is($tag[1], "greeting");
-is($tag[2], 5);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		'<greeting>',
+		'greeting',
+		5,
+		1,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], 'Hello, world!');
-is($tag[1], 'data');
-is($tag[2], 5);
-is($tag[3], 11);
+is_deeply(
+	\@tag,
+	[
+		'Hello, world!',
+		'data',
+		5,
+		11,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "</greeting>");
-is($tag[1], "/greeting");
-is($tag[2], 5);
-is($tag[3], 24);
+is_deeply(
+	\@tag,
+	[
+		'</greeting>',
+		'/greeting',
+		5,
+		24,
+	],
+);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
 $obj->set_file($data_dir->file('doc2.tags')->s);
 @tag = $obj->gettoken;
-is($tag[0], "<?xml version=\"1.0\" standalone=\"yes\"?>");
-is($tag[1], "?xml");
-is($tag[2], 1);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		"<?xml version=\"1.0\" standalone=\"yes\"?>",
+		'?xml',
+		1,
+		1,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
 my $right_ret = <<"END";
@@ -64,25 +100,40 @@ my $right_ret = <<"END";
 ]>
 END
 chomp $right_ret;
-is($tag[0], $right_ret);
-is($tag[1], "!doctype");
-is($tag[2], 2);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		$right_ret,
+		'!doctype',
+		2,
+		1,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<image height=\"32\" width=\"32\"/>");
-is($tag[1], "image");
-is($tag[2], 8);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		"<image height=\"32\" width=\"32\"/>",
+		'image',
+		8,
+		1,
+	],
+);
 $right_ret =~ s/^<!DOCTYPE image \[//;
 $right_ret =~ s/\]>$//;
 $obj->set_text($right_ret, 1);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ELEMENT image EMPTY>");
-is($tag[1], "!element");
-is($tag[2], 2);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		'<!ELEMENT image EMPTY>',
+		'!element',
+		2,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
 $right_ret = <<"END";
@@ -91,19 +142,29 @@ $right_ret = <<"END";
     width CDATA #REQUIRED>
 END
 chomp $right_ret;
-is($tag[0], $right_ret);
-is($tag[1], "!attlist");
-is($tag[2], 3);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		$right_ret,
+		'!attlist',
+		3,
+		3,
+	],
+);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
 $obj->set_file($data_dir->file('doc3.tags')->s);
 @tag = $obj->gettoken;
-is($tag[0], "<?xml version=\"1.0\" standalone=\"yes\"?>");
-is($tag[1], "?xml");
-is($tag[2], 1);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		"<?xml version=\"1.0\" standalone=\"yes\"?>",
+		'?xml',
+		1,
+		1,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
 $right_ret = <<"END";
@@ -114,116 +175,211 @@ $right_ret = <<"END";
 ]>
 END
 chomp $right_ret;
-is($tag[0], $right_ret);
-is($tag[1], "!doctype");
-is($tag[2], 2);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		$right_ret,
+		'!doctype',
+		2,
+		1,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<family>");
-is($tag[1], "family");
-is($tag[2], 7);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		'<family>',
+		'family',
+		7,
+		1,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<parent>");
-is($tag[1], "parent");
-is($tag[2], 8);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		'<parent>',
+		'parent',
+		8,
+		3,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "Judy");
-is($tag[1], "data");
-is($tag[2], 8);
-is($tag[3], 11);
+is_deeply(
+	\@tag,
+	[
+		'Judy',
+		'data',
+		8,
+		11,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "</parent>");
-is($tag[1], "/parent");
-is($tag[2], 8);
-is($tag[3], 15);
-@tag = $obj->gettoken;
-@tag = $obj->gettoken;
-is($tag[0], "<parent>");
-is($tag[1], "parent");
-is($tag[2], 9);
-is($tag[3], 3);
-@tag = $obj->gettoken;
-is($tag[0], "Layard");
-is($tag[1], "data");
-is($tag[2], 9);
-is($tag[3], 11);
-@tag = $obj->gettoken;
-is($tag[0], "</parent>");
-is($tag[1], "/parent");
-is($tag[2], 9);
-is($tag[3], 17);
-@tag = $obj->gettoken;
-@tag = $obj->gettoken;
-is($tag[0], "<child>");
-is($tag[1], "child");
-is($tag[2], 10);
-is($tag[3], 3);
-@tag = $obj->gettoken;
-is($tag[0], "Jennifer");
-is($tag[1], "data");
-is($tag[2], 10);
-is($tag[3], 10);
-@tag = $obj->gettoken;
-is($tag[0], "</child>");
-is($tag[1], "/child");
-is($tag[2], 10);
-is($tag[3], 18);
+is_deeply(
+	\@tag,
+	[
+		'</parent>',
+		'/parent',
+		8,
+		15,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<child>");
-is($tag[1], "child");
-is($tag[2], 11);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		'<parent>',
+		'parent',
+		9,
+		3,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "Brendan");
-is($tag[1], "data");
-is($tag[2], 11);
-is($tag[3], 10);
+is_deeply(
+	\@tag,
+	[
+		'Layard',
+		'data',
+		9,
+		11,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "</child>");
-is($tag[1], "/child");
-is($tag[2], 11);
-is($tag[3], 17);
+is_deeply(
+	\@tag,
+	[
+		'</parent>',
+		'/parent',
+		9,
+		17,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "</family>");
-is($tag[1], "/family");
-is($tag[2], 12);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		'<child>',
+		'child',
+		10,
+		3,
+	],
+);
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		'Jennifer',
+		'data',
+		10,
+		10,
+	],
+);
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		'</child>',
+		'/child',
+		10,
+		18,
+	],
+);
+@tag = $obj->gettoken;
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		'<child>',
+		'child',
+		11,
+		3,
+	],
+);
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		'Brendan',
+		'data',
+		11,
+		10,
+	],
+);
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		'</child>',
+		'/child',
+		11,
+		17,
+	],
+);
+@tag = $obj->gettoken;
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		'</family>',
+		'/family',
+		12,
+		1,
+	],
+);
 $right_ret =~ s/^<!DOCTYPE family \[//;
 $right_ret =~ s/\]>$//;
 $obj->set_text($right_ret, 1);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ELEMENT family (parent|child)*>");
-is($tag[1], "!element");
-is($tag[2], 2);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<!ELEMENT family (parent|child)*>",
+		'!element',
+		2,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ELEMENT parent (#PCDATA)>");
-is($tag[1], "!element");
-is($tag[2], 3);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<!ELEMENT parent (#PCDATA)>",
+		'!element',
+		3,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ELEMENT child (#PCDATA)>");
-is($tag[1], "!element");
-is($tag[2], 4);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<!ELEMENT child (#PCDATA)>",
+		'!element',
+		4,
+		3,
+	],
+);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
 $obj->set_file($data_dir->file('doc4.tags')->s);
 @tag = $obj->gettoken;
-is($tag[0], "<?xml version=\"1.0\" standalone=\"yes\"?>");
-is($tag[1], "?xml");
-is($tag[2], 1);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		"<?xml version=\"1.0\" standalone=\"yes\"?>",
+		'?xml',
+		1,
+		1,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
 $right_ret = <<"END";
@@ -243,180 +399,335 @@ $right_ret = <<"END";
 ]>
 END
 chomp $right_ret;
-is($tag[0], $right_ret);
-is($tag[1], "!doctype");
-is($tag[2], 2);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		$right_ret,
+		'!doctype',
+		2,
+		1,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<family>");
-is($tag[1], "family");
-is($tag[2], 16);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		'<family>',
+		'family',
+		16,
+		1,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<title>");
-is($tag[1], "title");
-is($tag[2], 17);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		'<title>',
+		'title',
+		17,
+		3,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "My Family");
-is($tag[1], "data");
-is($tag[2], 17);
-is($tag[3], 10);
+is_deeply(
+	\@tag,
+	[
+		'My Family',
+		'data',
+		17,
+		10,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "</title>");
-is($tag[1], "/title");
-is($tag[2], 17);
-is($tag[3], 19);
-@tag = $obj->gettoken;
-@tag = $obj->gettoken;
-is($tag[0], "<parent role=\"mother\">");
-is($tag[1], "parent");
-is($tag[2], 18);
-is($tag[3], 3);
-@tag = $obj->gettoken;
-is($tag[0], "Judy");
-is($tag[1], "data");
-is($tag[2], 18);
-is($tag[3], 25);
-@tag = $obj->gettoken;
-is($tag[0], "</parent>");
-is($tag[1], "/parent");
-is($tag[2], 18);
-is($tag[3], 29);
-@tag = $obj->gettoken;
-@tag = $obj->gettoken;
-is($tag[0], "<parent role=\"father\">");
-is($tag[1], "parent");
-is($tag[2], 19);
-is($tag[3], 3);
-@tag = $obj->gettoken;
-is($tag[0], "Layard");
-is($tag[1], "data");
-is($tag[2], 19);
-is($tag[3], 25);
-@tag = $obj->gettoken;
-is($tag[0], "</parent>");
-is($tag[1], "/parent");
-is($tag[2], 19);
-is($tag[3], 31);
+is_deeply(
+	\@tag,
+	[
+		'</title>',
+		'/title',
+		17,
+		19,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<child role=\"daughter\">");
-is($tag[1], "child");
-is($tag[2], 20);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<parent role=\"mother\">",
+		'parent',
+		18,
+		3,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "Jennifer");
-is($tag[1], "data");
-is($tag[2], 20);
-is($tag[3], 26);
+is_deeply(
+	\@tag,
+	[
+		'Judy',
+		'data',
+		18,
+		25,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "</child>");
-is($tag[1], "/child");
-is($tag[2], 20);
-is($tag[3], 34);
+is_deeply(
+	\@tag,
+	[
+		'</parent>',
+		'/parent',
+		18,
+		29,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<image source=\"JENN\" />");
-is($tag[1], "image");
-is($tag[2], 21);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<parent role=\"father\">",
+		'parent',
+		19,
+		3,
+	],
+);
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		'Layard',
+		'data',
+		19,
+		25,
+	],
+);
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		'</parent>',
+		'/parent',
+		19,
+		31,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<child role=\"son\">");
-is($tag[1], "child");
-is($tag[2], 22);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<child role=\"daughter\">",
+		'child',
+		20,
+		3,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "Brendan");
-is($tag[1], "data");
-is($tag[2], 22);
-is($tag[3], 21);
+is_deeply(
+	\@tag,
+	[
+		'Jennifer',
+		'data',
+		20,
+		26,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "</child>");
-is($tag[1], "/child");
-is($tag[2], 22);
-is($tag[3], 28);
+is_deeply(
+	\@tag,
+	[
+		'</child>',
+		'/child',
+		20,
+		34,
+	],
+);
 @tag = $obj->gettoken;
-is($tag[0], "\n  &footer;\n");
-is($tag[1], "data");
-is($tag[2], 22);
-is($tag[3], 36);
 @tag = $obj->gettoken;
-is($tag[0], "</family>");
-is($tag[1], "/family");
-is($tag[2], 24);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		"<image source=\"JENN\" />",
+		'image',
+		21,
+		3,
+	],
+);
+@tag = $obj->gettoken;
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		"<child role=\"son\">",
+		'child',
+		22,
+		3,
+	],
+);
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		'Brendan',
+		'data',
+		22,
+		21,
+	],
+);
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		'</child>',
+		'/child',
+		22,
+		28,
+	],
+);
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		"\n  &footer;\n",
+		'data',
+		22,
+		36,
+	],
+);
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		'</family>',
+		'/family',
+		24,
+		1,
+	],
+);
 $right_ret =~ s/^<!DOCTYPE family \[//;
 $right_ret =~ s/\]>$//;
 $obj->set_text($right_ret, 1);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ELEMENT family (#PCDATA|title|parent|child|image)*>");
-is($tag[1], "!element");
-is($tag[2], 2);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<!ELEMENT family (#PCDATA|title|parent|child|image)*>",
+		'!element',
+		2,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ELEMENT title (#PCDATA)>");
-is($tag[1], "!element");
-is($tag[2], 3);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<!ELEMENT title (#PCDATA)>",
+		'!element',
+		3,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ELEMENT parent (#PCDATA)>");
-is($tag[1], "!element");
-is($tag[2], 4);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<!ELEMENT parent (#PCDATA)>",
+		'!element',
+		4,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ATTLIST parent role (mother | father) #REQUIRED>");
-is($tag[1], "!attlist");
-is($tag[2], 5);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<!ATTLIST parent role (mother | father) #REQUIRED>",
+		'!attlist',
+		5,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ELEMENT child (#PCDATA)>");
-is($tag[1], "!element");
-is($tag[2], 6);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<!ELEMENT child (#PCDATA)>",
+		'!element',
+		6,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ATTLIST child role (daughter | son) #REQUIRED>");
-is($tag[1], "!attlist");
-is($tag[2], 7);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<!ATTLIST child role (daughter | son) #REQUIRED>",
+		'!attlist',
+		7,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!NOTATION gif SYSTEM \"image/gif\">");
-is($tag[1], "!notation");
-is($tag[2], 8);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<!NOTATION gif SYSTEM \"image/gif\">",
+		'!notation',
+		8,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ENTITY JENN SYSTEM ".
-	"\"http://images.about.com/sites/guidepics/html.gif\"\n".
-	"    NDATA gif>");
-is($tag[1], "!entity");
-is($tag[2], 9);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		'<!ENTITY JENN SYSTEM '.
+			'"http://images.about.com/sites/guidepics/html.gif"'.
+			"\n    NDATA gif>",
+		'!entity',
+		9,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ELEMENT image EMPTY>");
-is($tag[1], "!element");
-is($tag[2], 11);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		'<!ELEMENT image EMPTY>',
+		'!element',
+		11,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ATTLIST image source ENTITY #REQUIRED>");
-is($tag[1], "!attlist");
-is($tag[2], 12);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		'<!ATTLIST image source ENTITY #REQUIRED>',
+		'!attlist',
+		12,
+		3,
+	],
+);
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
-is($tag[0], "<!ENTITY footer \"Brought to you by Jennifer Kyrnin\">");
-is($tag[1], "!entity");
-is($tag[2], 13);
-is($tag[3], 3);
+is_deeply(
+	\@tag,
+	[
+		"<!ENTITY footer \"Brought to you by Jennifer Kyrnin\">",
+		'!entity',
+		13,
+		3,
+	],
+);
