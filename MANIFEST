@@ -58,7 +58,7 @@ t/Tag::Reader::Perl/00-use.t
 t/Tag::Reader::Perl/01-version.t
 t/Tag::Reader::Perl/02-pod_coverage.t
 t/Tag::Reader::Perl/03-pod.t
-t/Tag::Reader::Perl/04-constructor.t
+t/Tag::Reader::Perl/04-new.t
 t/Tag::Reader::Perl/05-start_tag.t
 t/Tag::Reader::Perl/06-end_tag.t
 t/Tag::Reader::Perl/07-comment.t
