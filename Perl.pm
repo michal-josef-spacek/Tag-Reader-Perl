@@ -443,7 +443,7 @@ __END__
 =head1 DEPENDENCIES
 
 L<Class::Utils>,
-L<Error::Simple::Multiple>,
+L<Error::Pure>,
 L<Readonly>,
 
 =head1 SEE ALSO
