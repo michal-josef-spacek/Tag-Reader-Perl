@@ -442,13 +442,13 @@ __END__
 
 =head1 DEPENDENCIES
 
-L<Class::Utils(3pm)>,
-L<Error::Simple::Multiple(3pm)>,
-L<Readonly(3pm)>,
+L<Class::Utils>,
+L<Error::Simple::Multiple>,
+L<Readonly>,
 
 =head1 SEE ALSO
 
-L<Tag::Reader(3pm)>,
+L<Tag::Reader>,
 
 =head1 AUTHOR
 
