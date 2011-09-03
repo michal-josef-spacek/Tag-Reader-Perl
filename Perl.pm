@@ -452,7 +452,9 @@ L<Tag::Reader(3pm)>,
 
 =head1 AUTHOR
 
-Michal Špaček L<tupinek@gmail.com>
+Michal Špaček L<mailto:skim@cpan.org>
+
+L<http://skim.cz>
 
 =head1 LICENSE AND COPYRIGHT
 
