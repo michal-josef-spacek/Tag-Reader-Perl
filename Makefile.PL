@@ -3,19 +3,28 @@ use strict;
 use warnings;
 
 # Modules.
-use ExtUtils::MakeMaker;
+use inc::Module::Install;
 
 # Definition.
-WriteMakefile(
-	'AUTHOR' => 'Michal Špaček <skim@cpan.org>',
-	'NAME' => 'Tag::Reader::Perl',
-	'PREREQ_PM' => {
-		'Class::Utils' => 0.01,
-		'Error::Pure' => 0.01,
-		'File::Object' => 0,
-	},
-	'VERSION_FROM' => 'Perl.pm',
-	'test' => {
-		'TESTS' => 't/Tag::Reader::Perl/*.t',
-	},
-);
+abstract '';
+author 'Michal Špaček <skim@cpan.org>';
+license 'bsd';
+name 'Tag-Reader-Perl';
+requires 'Class::Utils' => 0.02;
+requires 'Error::Pure' => 0.05;
+requires 'Readonly' => 0;
+resources 'repository' => {
+	'url' => 'git://github.com/tupinek/Tag-Reader-Perl',
+	'web' => 'https://github.com/tupinek/Tag-Reader-Perl',
+	'type' => 'git',
+};
+test_requires 'English' => 0;
+test_requires 'File::Object' => 0.03;
+test_requires 'Test::More' => 0;
+test_requires 'Test::Pod' => 0;
+test_requires 'Test::Pod::Coverage' => 0;
+tests_recursive;
+version '0.01';
+
+# Run.
+WriteAll();
