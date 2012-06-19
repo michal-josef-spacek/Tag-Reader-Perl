@@ -13,11 +13,10 @@ name 'Tag-Reader-Perl';
 requires 'Class::Utils' => 0.02;
 requires 'Error::Pure' => 0.05;
 requires 'Readonly' => 0;
-resources 'repository' => {
-	'url' => 'git://github.com/tupinek/Tag-Reader-Perl',
-	'web' => 'https://github.com/tupinek/Tag-Reader-Perl',
-	'type' => 'git',
-};
+resources 'bugtracker' => 'https://rt.cpan.org/Public/Dist/Display.html'.
+	'?Name=Tag-Reader-Perl';
+resources 'homepage' => 'https://github.com/tupinek/Tag-Reader-Perl';
+resources 'repository' => 'git://github.com/tupinek/Tag-Reader-Perl';
 test_requires 'English' => 0;
 test_requires 'File::Object' => 0.03;
 test_requires 'Test::More' => 0;
