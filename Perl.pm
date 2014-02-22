@@ -424,7 +424,20 @@ __END__
 
 =head1 ERRORS
 
- TODO
+ new():
+         From Class::Utils::set_params():
+                 Unknown parameter '%s'.
+
+ set_text():
+         Bad tag.
+         Bad text.
+         Cannot set new data if exists data.
+
+ set_file():
+         Bad tag.
+         Bad file.
+         Cannot set new data if exists data.
+         Cannot open file '%s'.
 
 =head1 EXAMPLE1
 
