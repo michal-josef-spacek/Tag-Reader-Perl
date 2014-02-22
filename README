@@ -3,18 +3,14 @@ NAME
 
 SYNOPSIS
      use Tags::Reader::Perl;
-     my $obj = Tags::Reader::Perl->new(%params);
+     my $obj = Tags::Reader::Perl->new;
      $obj->set_text($text, $force);
      $obj->set_file($file, $force);
      my @tokens = $obj->gettoken;
 
 METHODS
-    "new(%params)"
+    "new()"
              Constructor.
-
-            *       "set_errors"
-
-                     TODO
 
     "set_text($text[, $force])"
              TODO

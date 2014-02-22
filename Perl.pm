@@ -20,9 +20,6 @@ sub new {
 	my ($class, @params) = @_;
 	my $self = bless {}, $class;
 
-	# Show errors.
-	$self->{'set_errors'} = 0;
-
 	# Process params.
 	set_params($self, @params);
 
@@ -391,7 +388,7 @@ __END__
 =head1 SYNOPSIS
 
  use Tags::Reader::Perl;
- my $obj = Tags::Reader::Perl->new(%params);
+ my $obj = Tags::Reader::Perl->new;
  $obj->set_text($text, $force);
  $obj->set_file($file, $force);
  my @tokens = $obj->gettoken;
@@ -400,17 +397,9 @@ __END__
 
 =over 8
 
-=item C<new(%params)>
+=item C<new()>
 
  Constructor.
-
-=over 8
-
-=item * C<set_errors>
-
- TODO
-
-=back
 
 =item C<set_text($text[, $force])>
 
