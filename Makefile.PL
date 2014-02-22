@@ -10,6 +10,7 @@ abstract '';
 author 'Michal Špaček <skim@cpan.org>';
 license 'bsd';
 name 'Tag-Reader-Perl';
+readme_from 'Perl.pm';
 requires 'Class::Utils' => 0.02;
 requires 'Error::Pure' => 0.05;
 requires 'Readonly' => 0;

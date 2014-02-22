@@ -1,0 +1,69 @@
+NAME
+     Tags::Reader::Perl - TODO
+
+SYNOPSIS
+     TODO
+
+METHODS
+    new(%params)
+             Constructor.
+
+            *       set_errors
+
+                     TODO
+
+    set_text($file[, $force])
+             TODO
+
+    set_file($file[, $force])
+             TODO
+
+    gettoken()
+             TODO
+
+ERRORS
+     new():
+             From Class::Utils::set_params():
+                     Unknown parameter '%s'.
+
+     set_text():
+             Bad tag.
+             Bad text.
+             Cannot set new data if exists data.
+
+     set_file():
+             Bad tag.
+             Bad file.
+             Cannot set new data if exists data.
+             Cannot open file '%s'.
+
+EXAMPLE1
+     # Pragmas.
+     use strict;
+     use warnings;
+
+     # Modules.
+     use Tag::Reader::Perl;
+
+     # Object.
+     my $reader = Tag::Reader::Perl->new;
+
+     TODO
+
+DEPENDENCIES
+    Class::Utils, Error::Pure, Readonly,
+
+SEE ALSO
+    Tag::Reader,
+
+AUTHOR
+    Michal Špaček <mailto:skim@cpan.org>
+
+    <http://skim.cz>
+
+LICENSE AND COPYRIGHT
+    BSD license.
+
+VERSION
+    0.01
+
