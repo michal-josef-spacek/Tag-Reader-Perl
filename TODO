@@ -1,10 +1,11 @@
 TODO
 ====
-3. Prozkouset utf8.
+3. Prozkouset utf8. To vypada normalne funkcni, viz priklad.
 7. Je to _brutalne_ pomale. 
 8. Dokumentace.
 9. Predelat testy na is_deeply().
-10.
+10. Testy, ktere nejsou metody presunout do jineho cislovani.
+11.
 
 Applied
 =======
