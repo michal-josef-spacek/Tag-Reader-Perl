@@ -9,20 +9,20 @@ SYNOPSIS
      my @tokens = $obj->gettoken;
 
 METHODS
-    new(%params)
+    "new(%params)"
              Constructor.
 
-            *       set_errors
+            *       "set_errors"
 
                      TODO
 
-    set_text($file[, $force])
+    "set_text($text[, $force])"
              TODO
 
-    set_file($file[, $force])
+    "set_file($file[, $force])"
              TODO
 
-    gettoken()
+    "gettoken()"
              TODO
 
 ERRORS

@@ -400,27 +400,27 @@ __END__
 
 =over 8
 
-=item B<new(%params)>
+=item C<new(%params)>
 
  Constructor.
 
 =over 8
 
-=item * B<set_errors>
+=item * C<set_errors>
 
  TODO
 
 =back
 
-=item B<set_text($file[, $force])>
+=item C<set_text($text[, $force])>
 
  TODO
 
-=item B<set_file($file[, $force])>
+=item C<set_file($file[, $force])>
 
  TODO
 
-=item B<gettoken()>
+=item C<gettoken()>
 
  TODO
 
