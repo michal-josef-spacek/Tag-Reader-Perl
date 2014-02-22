@@ -12,7 +12,7 @@ my $data_dir = File::Object->new->up->dir('data');
 
 # Test.
 my $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('element1.tags')->s);
+$obj->set_file($data_dir->file('element1.sgml')->s);
 my @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -26,7 +26,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('element2.tags')->s);
+$obj->set_file($data_dir->file('element2.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -40,7 +40,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('element3.tags')->s);
+$obj->set_file($data_dir->file('element3.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -54,7 +54,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('element4.tags')->s);
+$obj->set_file($data_dir->file('element4.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -68,7 +68,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('element5.tags')->s);
+$obj->set_file($data_dir->file('element5.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -82,7 +82,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('element6.tags')->s);
+$obj->set_file($data_dir->file('element6.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -96,7 +96,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('element7.tags')->s);
+$obj->set_file($data_dir->file('element7.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -110,7 +110,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('element8.tags')->s);
+$obj->set_file($data_dir->file('element8.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -124,7 +124,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('element9.tags')->s);
+$obj->set_file($data_dir->file('element9.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -139,7 +139,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('element10.tags')->s);
+$obj->set_file($data_dir->file('element10.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,

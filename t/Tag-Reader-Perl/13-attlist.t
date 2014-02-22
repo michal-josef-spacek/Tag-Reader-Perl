@@ -12,7 +12,7 @@ my $data_dir = File::Object->new->up->dir('data');
 
 # Test.
 my $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('attlist1.tags')->s);
+$obj->set_file($data_dir->file('attlist1.sgml')->s);
 my @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -27,7 +27,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('attlist2.tags')->s);
+$obj->set_file($data_dir->file('attlist2.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -43,7 +43,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('attlist3.tags')->s);
+$obj->set_file($data_dir->file('attlist3.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -57,7 +57,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('attlist4.tags')->s);
+$obj->set_file($data_dir->file('attlist4.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -71,7 +71,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('attlist5.tags')->s);
+$obj->set_file($data_dir->file('attlist5.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -85,7 +85,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('attlist6.tags')->s);
+$obj->set_file($data_dir->file('attlist6.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,

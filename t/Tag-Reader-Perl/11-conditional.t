@@ -12,7 +12,7 @@ my $data_dir = File::Object->new->up->dir('data');
 
 # Test.
 my $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('conditional1.tags')->s);
+$obj->set_file($data_dir->file('conditional1.sgml')->s);
 my @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -26,7 +26,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('conditional2.tags')->s);
+$obj->set_file($data_dir->file('conditional2.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
