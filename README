@@ -4,21 +4,21 @@ NAME
 SYNOPSIS
      use Tags::Reader::Perl;
      my $obj = Tags::Reader::Perl->new;
-     $obj->set_text($text, $force);
-     $obj->set_file($file, $force);
      my @tokens = $obj->gettoken;
+     $obj->set_file($file, $force);
+     $obj->set_text($text, $force);
 
 METHODS
     "new()"
              Constructor.
 
-    "set_text($text[, $force])"
+    "gettoken()"
              TODO
 
     "set_file($file[, $force])"
              TODO
 
-    "gettoken()"
+    "set_text($text[, $force])"
              TODO
 
 ERRORS

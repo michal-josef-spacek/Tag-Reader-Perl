@@ -27,48 +27,6 @@ sub new {
 	return $self;
 }
 
-# Set text.
-sub set_text {
-	my ($self, $text, $force) = @_;
-	if (! $text) {
-		err 'Bad text.';
-	}
-	if (! $force && (defined $self->{'text'}
-		|| defined $self->{'filename'})) {
-
-		err 'Cannot set new data if exists data.';
-	}
-	$self->{'text'} = $text;
-
-	# Reset values.
-	$self->_reset;
-
-	return;
-}
-
-# Set file.
-sub set_file {
-	my ($self, $file, $force) = @_;
-	if (! $file || ! -r $file) {
-		err 'Bad file.';
-	}
-	if (! $force && (defined $self->{'text'}
-		|| defined $self->{'filename'})) {
-
-		err 'Cannot set new data if exists data.';
-	}
-	my $inf;
-	if (! open $inf, '<', $file) {
-		err "Cannot open file '$file'.";
-	}
-	$self->{'filename'} = $inf;
-
-	# Reset values.
-	$self->_reset;
-
-	return;
-}
-
 # Get tag token.
 sub gettoken {
 	my $self = shift;
@@ -120,6 +78,48 @@ sub gettoken {
 	}
 	return wantarray ? ($data, $self->{'tag_type'}, $self->{'tagline'},
 		$self->{'tagcharpos'}) : $data;
+}
+
+# Set file.
+sub set_file {
+	my ($self, $file, $force) = @_;
+	if (! $file || ! -r $file) {
+		err 'Bad file.';
+	}
+	if (! $force && (defined $self->{'text'}
+		|| defined $self->{'filename'})) {
+
+		err 'Cannot set new data if exists data.';
+	}
+	my $inf;
+	if (! open $inf, '<', $file) {
+		err "Cannot open file '$file'.";
+	}
+	$self->{'filename'} = $inf;
+
+	# Reset values.
+	$self->_reset;
+
+	return;
+}
+
+# Set text.
+sub set_text {
+	my ($self, $text, $force) = @_;
+	if (! $text) {
+		err 'Bad text.';
+	}
+	if (! $force && (defined $self->{'text'}
+		|| defined $self->{'filename'})) {
+
+		err 'Cannot set new data if exists data.';
+	}
+	$self->{'text'} = $text;
+
+	# Reset values.
+	$self->_reset;
+
+	return;
 }
 
 # Reset class values.
@@ -389,9 +389,9 @@ __END__
 
  use Tags::Reader::Perl;
  my $obj = Tags::Reader::Perl->new;
- $obj->set_text($text, $force);
- $obj->set_file($file, $force);
  my @tokens = $obj->gettoken;
+ $obj->set_file($file, $force);
+ $obj->set_text($text, $force);
 
 =head1 METHODS
 
@@ -401,7 +401,7 @@ __END__
 
  Constructor.
 
-=item C<set_text($text[, $force])>
+=item C<gettoken()>
 
  TODO
 
@@ -409,7 +409,7 @@ __END__
 
  TODO
 
-=item C<gettoken()>
+=item C<set_text($text[, $force])>
 
  TODO
 
