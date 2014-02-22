@@ -390,7 +390,11 @@ __END__
 
 =head1 SYNOPSIS
 
- TODO
+ use Tags::Reader::Perl;
+ my $obj = Tags::Reader::Perl->new(%params);
+ $obj->set_text($text, $force);
+ $obj->set_file($file, $force);
+ my @tokens = $obj->gettoken;
 
 =head1 METHODS
 

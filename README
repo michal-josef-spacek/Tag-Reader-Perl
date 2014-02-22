@@ -2,7 +2,11 @@ NAME
      Tags::Reader::Perl - TODO
 
 SYNOPSIS
-     TODO
+     use Tags::Reader::Perl;
+     my $obj = Tags::Reader::Perl->new(%params);
+     $obj->set_text($text, $force);
+     $obj->set_file($file, $force);
+     my @tokens = $obj->gettoken;
 
 METHODS
     new(%params)
