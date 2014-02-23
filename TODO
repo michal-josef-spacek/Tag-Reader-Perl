@@ -9,7 +9,11 @@ TODO
     idealni ;-)
 12. Pridat dalsi typy dat. Abych mohl udelat sgml2pyx, sgml2esis, sgml2sesis
     skripty.
-13.
+13. Popsat tag typy do dokumentace.
+    data: !data
+    element: nazev elementu
+    ...
+14.
 
 Applied
 =======
