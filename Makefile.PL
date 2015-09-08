@@ -7,7 +7,7 @@ use inc::Module::Install;
 
 # Definition.
 abstract '';
-author 'Michal Špaček <skim@cpan.org>';
+author 'Michal Spacek <skim@cpan.org>';
 license 'bsd';
 name 'Tag-Reader-Perl';
 readme_from 'Perl.pm';
