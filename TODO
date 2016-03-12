@@ -9,6 +9,9 @@ TODO
     idealni ;-)
 12. Pridat dalsi typy dat. Abych mohl udelat sgml2pyx, sgml2esis, sgml2sesis
     skripty.
+SGML::PYX a App::SGML2PYX
+SGML::ESIS a App::SGML2ESIS
+SGML::SESIS a App::SGML2SESIS
 13. Popsat tag typy do dokumentace.
     data: !data
     element: nazev elementu
