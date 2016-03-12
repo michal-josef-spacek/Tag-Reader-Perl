@@ -594,7 +594,7 @@ L<Readonly>,
 
 =head1 SEE ALSO
 
-L<Tag::Reader>,
+L<Tag::Reader>.
 
 =head1 AUTHOR
 

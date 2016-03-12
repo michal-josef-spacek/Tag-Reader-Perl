@@ -194,7 +194,7 @@ DEPENDENCIES
     Class::Utils, Error::Pure, Readonly,
 
 SEE ALSO
-    Tag::Reader,
+    Tag::Reader.
 
 AUTHOR
     Michal Špaček <mailto:skim@cpan.org>
