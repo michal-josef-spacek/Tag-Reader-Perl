@@ -1,1 +1,1 @@
-<!ELEMENT container ANY>
+<x><![CDATA[a<x>b]]]></x>

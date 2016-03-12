@@ -1,1 +1,1 @@
-<!ELEMENT %name.para; %content.para; >
+<text><![CDATA[<text>text</text>]]></text>

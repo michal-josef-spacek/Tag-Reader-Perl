@@ -23,7 +23,7 @@ is($tag[3], 1);
 $obj = Tag::Reader::Perl->new;
 $obj->set_file($data_dir->file('comment2.sgml')->s);
 @tag = $obj->gettoken;
-is($tag[0], "<!-- <tag> text </tag> -->");
+is($tag[0], "<!-- <element> text </element> -->");
 is($tag[1], "!--");
 is($tag[2], 1);
 is($tag[3], 1);

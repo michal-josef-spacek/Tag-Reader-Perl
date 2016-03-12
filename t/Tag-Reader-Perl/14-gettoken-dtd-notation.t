@@ -12,7 +12,7 @@ my $data_dir = File::Object->new->up->dir('data');
 
 # Test.
 my $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('notation1.sgml')->s);
+$obj->set_file($data_dir->file('dtd-notation1.sgml')->s);
 my @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -27,7 +27,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('notation2.sgml')->s);
+$obj->set_file($data_dir->file('dtd-notation2.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,

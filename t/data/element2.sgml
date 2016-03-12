@@ -1,1 +1,1 @@
-<!ELEMENT p (#PCDATA|emph)* >
+<text:color>text</text:color>

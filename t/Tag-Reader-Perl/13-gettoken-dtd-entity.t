@@ -12,7 +12,7 @@ my $data_dir = File::Object->new->up->dir('data');
 
 # Test.
 my $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('entity1.sgml')->s);
+$obj->set_file($data_dir->file('dtd-entity1.sgml')->s);
 my @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -26,7 +26,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('entity2.sgml')->s);
+$obj->set_file($data_dir->file('dtd-entity2.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -40,7 +40,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('entity3.sgml')->s);
+$obj->set_file($data_dir->file('dtd-entity3.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -54,7 +54,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('entity4.sgml')->s);
+$obj->set_file($data_dir->file('dtd-entity4.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -69,7 +69,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('entity5.sgml')->s);
+$obj->set_file($data_dir->file('dtd-entity5.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -84,7 +84,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('entity6.sgml')->s);
+$obj->set_file($data_dir->file('dtd-entity6.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -100,7 +100,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('entity7.sgml')->s);
+$obj->set_file($data_dir->file('dtd-entity7.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -118,7 +118,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('entity8.sgml')->s);
+$obj->set_file($data_dir->file('dtd-entity8.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -134,7 +134,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('entity9.sgml')->s);
+$obj->set_file($data_dir->file('dtd-entity9.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -159,7 +159,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('entity10.sgml')->s);
+$obj->set_file($data_dir->file('dtd-entity10.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -196,7 +196,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('entity11.sgml')->s);
+$obj->set_file($data_dir->file('dtd-entity11.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,
@@ -254,7 +254,7 @@ is_deeply(
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('entity12.sgml')->s);
+$obj->set_file($data_dir->file('dtd-entity12.sgml')->s);
 @tag = $obj->gettoken;
 is_deeply(
 	\@tag,

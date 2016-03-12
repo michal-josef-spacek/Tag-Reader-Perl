@@ -12,7 +12,7 @@ my $data_dir = File::Object->new->up->dir('data');
 
 # Test.
 my $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('tag1.sgml')->s);
+$obj->set_file($data_dir->file('element1.sgml')->s);
 my @tag = $obj->gettoken;
 is($tag[0], "<text>");
 is($tag[1], "text");
@@ -36,7 +36,7 @@ is($tag[3], 18);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('tag2.sgml')->s);
+$obj->set_file($data_dir->file('element2.sgml')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<text:color>");
 is($tag[1], "text:color");
@@ -60,7 +60,7 @@ is($tag[3], 30);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('tag3.sgml')->s);
+$obj->set_file($data_dir->file('element3.sgml')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<text>");
 is($tag[1], "text");
@@ -84,7 +84,7 @@ is($tag[3], 43);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
-$obj->set_file($data_dir->file('tag4.sgml')->s);
+$obj->set_file($data_dir->file('element4.sgml')->s);
 @tag = $obj->gettoken;
 is($tag[0], "<x>");
 is($tag[1], "x");
