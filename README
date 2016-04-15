@@ -194,7 +194,11 @@ DEPENDENCIES
     Class::Utils, Error::Pure, Readonly,
 
 SEE ALSO
-    Tag::Reader.
+    Tag::Reader
+        Parse SGML/HTML/XML by each "tag".
+
+    HTML::TagReader
+        Perl extension module for reading html/sgml/xml files by tags.
 
 AUTHOR
     Michal Špaček <mailto:skim@cpan.org>

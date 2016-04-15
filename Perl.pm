@@ -594,7 +594,17 @@ L<Readonly>,
 
 =head1 SEE ALSO
 
-L<Tag::Reader>.
+=over
+
+=item L<Tag::Reader>
+
+Parse SGML/HTML/XML by each "tag".
+
+=item L<HTML::TagReader>
+
+Perl extension module for reading html/sgml/xml files by tags.
+
+=back
 
 =head1 AUTHOR
 
