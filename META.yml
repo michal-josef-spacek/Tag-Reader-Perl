@@ -1,5 +1,5 @@
 ---
-abstract: ''
+abstract: 'Parse SGML/HTML/XML by each "tag".'
 author:
   - 'Michal Spacek <skim@cpan.org>'
 build_requires:

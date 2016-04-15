@@ -1,5 +1,5 @@
 NAME
-     Tags::Reader::Perl - TODO
+     Tags::Reader::Perl - Parse SGML/HTML/XML by each "tag".
 
 SYNOPSIS
      use Tags::Reader::Perl;

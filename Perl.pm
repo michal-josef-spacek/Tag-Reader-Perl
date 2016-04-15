@@ -383,7 +383,7 @@ __END__
 
 =head1 NAME
 
- Tags::Reader::Perl - TODO
+ Tags::Reader::Perl - Parse SGML/HTML/XML by each "tag".
 
 =head1 SYNOPSIS
 
