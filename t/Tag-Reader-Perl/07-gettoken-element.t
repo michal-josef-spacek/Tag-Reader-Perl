@@ -5,7 +5,8 @@ use warnings;
 # Modules.
 use File::Object;
 use Tag::Reader::Perl;
-use Test::More 'tests' => 64;
+use Test::More 'tests' => 17;
+use Test::NoWarnings;
 
 # Directories.
 my $data_dir = File::Object->new->up->dir('data');
@@ -14,94 +15,191 @@ my $data_dir = File::Object->new->up->dir('data');
 my $obj = Tag::Reader::Perl->new;
 $obj->set_file($data_dir->file('element1.sgml')->s);
 my @tag = $obj->gettoken;
-is($tag[0], "<text>");
-is($tag[1], "text");
-is($tag[2], 1);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		'<text>',
+		'text',
+		1,
+		1,
+	],
+	'Simple XML - text element.',
+);
 @tag = $obj->gettoken;
-is($tag[0], 'text');
-is($tag[1], '!data');
-is($tag[2], 1);
-is($tag[3], 7);
+is_deeply(
+	\@tag,
+	[
+		'text',
+		'!data',
+		1,
+		7,
+	],
+	'Simple XML - data.',
+);
 @tag = $obj->gettoken;
-is($tag[0], '</text>');
-is($tag[1], '/text');
-is($tag[2], 1);
-is($tag[3], 11);
+is_deeply(
+	\@tag,
+	[
+		'</text>',
+		'/text',
+		1,
+		11,
+	],
+	'Simple XML - end of text element.',
+);
 @tag = $obj->gettoken;
-is($tag[0], "\n");
-is($tag[1], '!data');
-is($tag[2], 1);
-is($tag[3], 18);
+is_deeply(
+	\@tag,
+	[
+		"\n",
+		'!data',
+		1,
+		18,
+	],
+	'Simple XML - newline.',
+);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
 $obj->set_file($data_dir->file('element2.sgml')->s);
 @tag = $obj->gettoken;
-is($tag[0], "<text:color>");
-is($tag[1], "text:color");
-is($tag[2], 1);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		'<text:color>',
+		'text:color',
+		1,
+		1,
+	],
+	'Prefixed XML - start element.',
+);
 @tag = $obj->gettoken;
-is($tag[0], 'text');
-is($tag[1], '!data');
-is($tag[2], 1);
-is($tag[3], 13);
+is_deeply(
+	\@tag,
+	[
+		'text',
+		'!data',
+		1,
+		13,
+	],
+	'Prefixed XML - data.',
+);
 @tag = $obj->gettoken;
-is($tag[0], '</text:color>');
-is($tag[1], '/text:color');
-is($tag[2], 1);
-is($tag[3], 17);
+is_deeply(
+	\@tag,
+	[
+		'</text:color>',
+		'/text:color',
+		1,
+		17,
+	],
+	'Prefixed XML - end of element.',
+);
 @tag = $obj->gettoken;
-is($tag[0], "\n");
-is($tag[1], '!data');
-is($tag[2], 1);
-is($tag[3], 30);
+is_deeply(
+	\@tag,
+	[
+		"\n",
+		'!data',
+		1,
+		30,
+	],
+	'Prefixed XML - newline.',
+);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
 $obj->set_file($data_dir->file('element3.sgml')->s);
 @tag = $obj->gettoken;
-is($tag[0], "<text>");
-is($tag[1], "text");
-is($tag[2], 1);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		'<text>',
+		'text',
+		1,
+		1,
+	],
+	'XML with CDATA #1 - start element.',
+);
 @tag = $obj->gettoken;
-is($tag[0], '<![CDATA[<text>text</text>]]>');
-is($tag[1], '![cdata[');
-is($tag[2], 1);
-is($tag[3], 7);
+is_deeply(
+	\@tag,
+	[
+		'<![CDATA[<text>text</text>]]>',
+		'![cdata[',
+		1,
+		7,
+	],
+	'XML with CDATA #1 - cdata.',
+);
 @tag = $obj->gettoken;
-is($tag[0], '</text>');
-is($tag[1], '/text');
-is($tag[2], 1);
-is($tag[3], 36);
+is_deeply(
+	\@tag,
+	[
+		'</text>',
+		'/text',
+		1,
+		36,
+	],
+	'XML with CDATA #1 - end of element.',
+);
 @tag = $obj->gettoken;
-is($tag[0], "\n");
-is($tag[1], '!data');
-is($tag[2], 1);
-is($tag[3], 43);
+is_deeply(
+	\@tag,
+	[
+		"\n",
+		'!data',
+		1,
+		43,
+	],
+	'XML with CDATA #1 - newline.',
+);
 
 # Test.
 $obj = Tag::Reader::Perl->new;
 $obj->set_file($data_dir->file('element4.sgml')->s);
 @tag = $obj->gettoken;
-is($tag[0], "<x>");
-is($tag[1], "x");
-is($tag[2], 1);
-is($tag[3], 1);
+is_deeply(
+	\@tag,
+	[
+		'<x>',
+		'x',
+		1,
+		1,
+	],
+	'XML with CDATA #2 - start element.',
+);
 @tag = $obj->gettoken;
-is($tag[0], '<![CDATA[a<x>b]]]>');
-is($tag[1], '![cdata[a');
-is($tag[2], 1);
-is($tag[3], 4);
+# TODO Co to je za typ?
+is_deeply(
+	\@tag,
+	[
+		'<![CDATA[a<x>b]]]>',
+		'![cdata[a',
+		1,
+		4,
+	],
+	'XML with CDATA #2 - cdata.',
+);
 @tag = $obj->gettoken;
-is($tag[0], '</x>');
-is($tag[1], '/x');
-is($tag[2], 1);
-is($tag[3], 22);
+is_deeply(
+	\@tag,
+	[
+		'</x>',
+		'/x',
+		1,
+		22,
+	],
+	'XML with CDATA #2 - end of element.',
+);
 @tag = $obj->gettoken;
-is($tag[0], "\n");
-is($tag[1], '!data');
-is($tag[2], 1);
-is($tag[3], 26);
+is_deeply(
+	\@tag,
+	[
+		"\n",
+		'!data',
+		1,
+		26,
+	],
+	'XML with CDATA #2 - newline.',
+);
