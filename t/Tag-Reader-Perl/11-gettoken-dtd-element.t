@@ -5,7 +5,8 @@ use warnings;
 # Modules.
 use File::Object;
 use Tag::Reader::Perl;
-use Test::More 'tests' => 10;
+use Test::More 'tests' => 11;
+use Test::NoWarnings;
 
 # Directories.
 my $data_dir = File::Object->new->up->dir('data');
