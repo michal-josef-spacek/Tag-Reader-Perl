@@ -415,6 +415,27 @@ __END__
 
 =back
 
+=head1 TOKEN STRUCTURE
+
+ Structure contains 4 fields in array:
+ - parsed data
+ - tag type
+ - number of line
+ - number of column in line
+
+ Tag types are:
+ - '[\w:]+' - element name.
+ - '/[\w:]+' - end of element name.
+ - '!data' - data
+ - '![cdata[' - cdata
+ - '!--' - comment
+ - '?\w+' - instruction
+ - '![\w+' - conditional
+ - '!attlist' - DTD attlist
+ - '!element' - DTD element
+ - '!entity' - DTD entity
+ - '!notation' - DTD notation
+
 =head1 ERRORS
 
  new():

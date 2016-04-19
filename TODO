@@ -11,10 +11,6 @@ TODO
 SGML::PYX a App::SGML2PYX
 SGML::ESIS a App::SGML2ESIS
 SGML::SESIS a App::SGML2SESIS
-13. Popsat tag typy do dokumentace.
-    data: !data
-    element: nazev elementu
-    ...
 14. Benchmark oproti HTML::TokeParse
 15. Proc parsovani <!CDATA[a<x>b]]> vrati '!cdata[a' ?
 16. Komentare k testum.
@@ -38,4 +34,10 @@ OK [20050822] skim
 OK [20050827] skim
 
 9. Predelat testy na is_deeply().
+OK [20160419] skim
+
+13. Popsat tag typy do dokumentace.
+    data: !data
+    element: nazev elementu
+    ...
 OK [20160419] skim
