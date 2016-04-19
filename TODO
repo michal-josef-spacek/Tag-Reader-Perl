@@ -3,7 +3,6 @@ TODO
 3. Prozkouset utf8. To vypada normalne funkcni, viz priklad.
 7. Je to _brutalne_ pomale. 
 8. Dokumentace.
-9. Predelat testy na is_deeply().
 10. Testy, ktere nejsou metody presunout do jineho cislovani.
 11. Prace ve stylu set_text(), set_file() a check if (text), if (file) neni
     idealni ;-)
@@ -18,7 +17,8 @@ SGML::SESIS a App::SGML2SESIS
     ...
 14. Benchmark oproti HTML::TokeParse
 15. Proc parsovani <!CDATA[a<x>b]]> vrati '!cdata[a' ?
-16.
+16. Komentare k testum.
+17.
 
 Applied
 =======
@@ -36,3 +36,6 @@ OK [20050822] skim
 
 6. Opravit chybu v entity12.tags
 OK [20050827] skim
+
+9. Predelat testy na is_deeply().
+OK [20160419] skim
