@@ -23,6 +23,7 @@ is_deeply(
 		1,
 		1,
 	],
+	'Parse conditional #1.',
 );
 
 # Test.
@@ -37,4 +38,5 @@ is_deeply(
 		1,
 		1,
 	],
+	'Parse conditional #2.',
 );

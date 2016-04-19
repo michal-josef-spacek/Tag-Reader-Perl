@@ -24,6 +24,7 @@ is_deeply(
 		1,
 		1,
 	],
+	'Parse notation #1.',
 );
 
 # Test.
@@ -41,4 +42,5 @@ is_deeply(
 		1,
 		1,
 	],
+	'Parse notation #2.',
 );
