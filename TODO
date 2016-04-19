@@ -17,7 +17,8 @@ SGML::SESIS a App::SGML2SESIS
     element: nazev elementu
     ...
 14. Benchmark oproti HTML::TokeParse
-15.
+15. Proc parsovani <!CDATA[a<x>b]]> vrati '!cdata[a' ?
+16.
 
 Applied
 =======
