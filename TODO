@@ -11,7 +11,7 @@ SGML::PYX a App::SGML2PYX
 SGML::ESIS a App::SGML2ESIS
 SGML::SESIS a App::SGML2SESIS
 14. Benchmark oproti HTML::TokeParse
-15. Proc parsovani <!CDATA[a<x>b]]> vrati '!cdata[a' ?
+15. Proc parsovani <![CDATA[a<x>b]]> vrati '![cdata[a' ?
 16. Komentare k testum.
 17.
 
