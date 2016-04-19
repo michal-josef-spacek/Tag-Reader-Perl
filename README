@@ -13,13 +13,20 @@ METHODS
              Constructor.
 
     "gettoken()"
-             TODO
+             Get parsed token.
+             Returns structure defining parsed token in array context. See TOKEN STRUCTURE
+             e.g. <xml> → ('<xml>', 'xml', 1, 1)
+             Returns parsed token in scalar mode.
+             e.g. <xml> → '<xml>'
 
     "set_file($file[, $force])"
-             TODO
+             Set file for parsing.
+             If $force present, reset file for parsing if exists previous text or file.
 
     "set_text($text[, $force])"
-             TODO
+             Set text for parsing.
+             if $force present, reset text for parsing if exists previous text or file.
+
 TOKEN STRUCTURE
      Structure contains 4 fields in array:
      - parsed data

@@ -2,7 +2,6 @@ TODO
 ====
 3. Prozkouset utf8. To vypada normalne funkcni, viz priklad.
 7. Je to _brutalne_ pomale. 
-8. Dokumentace.
 10. Testy, ktere nejsou metody presunout do jineho cislovani.
 11. Prace ve stylu set_text(), set_file() a check if (text), if (file) neni
     idealni ;-)
@@ -40,4 +39,7 @@ OK [20160419] skim
     data: !data
     element: nazev elementu
     ...
+OK [20160419] skim
+
+8. Dokumentace.
 OK [20160419] skim

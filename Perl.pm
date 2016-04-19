@@ -403,15 +403,21 @@ __END__
 
 =item C<gettoken()>
 
- TODO
+ Get parsed token.
+ Returns structure defining parsed token in array context. See TOKEN STRUCTURE
+ e.g. <xml> → ('<xml>', 'xml', 1, 1)
+ Returns parsed token in scalar mode.
+ e.g. <xml> → '<xml>'
 
 =item C<set_file($file[, $force])>
 
- TODO
+ Set file for parsing.
+ If $force present, reset file for parsing if exists previous text or file.
 
 =item C<set_text($text[, $force])>
 
- TODO
+ Set text for parsing.
+ if $force present, reset text for parsing if exists previous text or file.
 
 =back
 
