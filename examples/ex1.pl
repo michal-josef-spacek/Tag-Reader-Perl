@@ -45,7 +45,7 @@ while (my @tag = $obj->gettoken) {
 # [
 # 	[0]: ' 
 #   '
-# 	[1]: data
+# 	[1]: !data
 # 	[2]: 1
 # 	[3]: 11
 # ]
@@ -58,7 +58,7 @@ while (my @tag = $obj->gettoken) {
 # [
 # 	[0]: '
 #     '
-# 	[1]: data
+# 	[1]: !data
 # 	[2]: 2
 # 	[3]: 21
 # ]
@@ -71,7 +71,7 @@ while (my @tag = $obj->gettoken) {
 # [
 # 	[0]: '
 #     '
-# 	[1]: data
+# 	[1]: !data
 # 	[2]: 3
 # 	[3]: 12
 # ]
@@ -83,7 +83,7 @@ while (my @tag = $obj->gettoken) {
 # ]
 # [
 # 	[0]: 'Nová'
-# 	[1]: data
+# 	[1]: !data
 # 	[2]: 4
 # 	[3]: 12
 # ]
@@ -96,7 +96,7 @@ while (my @tag = $obj->gettoken) {
 # [
 # 	[0]: '
 #     '
-# 	[1]: data
+# 	[1]: !data
 # 	[2]: 4
 # 	[3]: 24
 # ]
@@ -108,7 +108,7 @@ while (my @tag = $obj->gettoken) {
 # ]
 # [
 # 	[0]: '5'
-# 	[1]: data
+# 	[1]: !data
 # 	[2]: 5
 # 	[3]: 12
 # ]
@@ -121,7 +121,7 @@ while (my @tag = $obj->gettoken) {
 # [
 # 	[0]: '
 #   '
-# 	[1]: data
+# 	[1]: !data
 # 	[2]: 5
 # 	[3]: 21
 # ]
@@ -134,7 +134,7 @@ while (my @tag = $obj->gettoken) {
 # [
 # 	[0]: '
 # '
-# 	[1]: data
+# 	[1]: !data
 # 	[2]: 6
 # 	[3]: 12
 # ]
@@ -147,7 +147,7 @@ while (my @tag = $obj->gettoken) {
 # [
 # 	[0]: '
 # '
-# 	[1]: data
+# 	[1]: !data
 # 	[2]: 7
 # 	[3]: 12
 # ]
