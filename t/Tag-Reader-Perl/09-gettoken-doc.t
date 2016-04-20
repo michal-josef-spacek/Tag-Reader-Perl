@@ -24,6 +24,7 @@ is_deeply(
 		1,
 		1,
 	],
+	'Example document #1 - XML declaration.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -34,6 +35,7 @@ is_deeply(
 		1,
 		56,
 	],
+	'Example document #1 - newline.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -44,6 +46,7 @@ is_deeply(
 		2,
 		1,
 	],
+	'Example document #1 - doctype.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -55,6 +58,7 @@ is_deeply(
 		5,
 		1,
 	],
+	'Example document #1 - start of greeting element.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -65,6 +69,7 @@ is_deeply(
 		5,
 		11,
 	],
+	'Example document #1 - example data.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -75,6 +80,7 @@ is_deeply(
 		5,
 		24,
 	],
+	'Example document #1 - end of greeting element.',
 );
 
 # Test.
@@ -89,6 +95,7 @@ is_deeply(
 		1,
 		1,
 	],
+	'Example document #2 - XML declaration.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -109,6 +116,7 @@ is_deeply(
 		2,
 		1,
 	],
+	'Example document #2 - doctype.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -120,6 +128,7 @@ is_deeply(
 		8,
 		1,
 	],
+	'Example document #2 - image element with attributes.',
 );
 $right_ret =~ s/^<!DOCTYPE image \[//;
 $right_ret =~ s/\]>$//;
@@ -134,6 +143,7 @@ is_deeply(
 		2,
 		3,
 	],
+	'Example document #2 - DTD element.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -151,6 +161,7 @@ is_deeply(
 		3,
 		3,
 	],
+	'Example document #2 - DTD attlist.',
 );
 
 # Test.
@@ -165,6 +176,7 @@ is_deeply(
 		1,
 		1,
 	],
+	'Example document #3 - XML declaration.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -184,6 +196,7 @@ is_deeply(
 		2,
 		1,
 	],
+	'Example document #3 - doctype.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -195,6 +208,7 @@ is_deeply(
 		7,
 		1,
 	],
+	'Example document #3 - start of family element.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -206,6 +220,7 @@ is_deeply(
 		8,
 		3,
 	],
+	'Example document #3 - start of parent element.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -216,6 +231,7 @@ is_deeply(
 		8,
 		11,
 	],
+	'Example document #3 - character data.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -226,6 +242,7 @@ is_deeply(
 		8,
 		15,
 	],
+	'Example document #3 - end of parent element.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -237,6 +254,7 @@ is_deeply(
 		9,
 		3,
 	],
+	'Example document #3 - begin of parent element.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -247,6 +265,7 @@ is_deeply(
 		9,
 		11,
 	],
+	'Example document #3 - character data.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -257,6 +276,7 @@ is_deeply(
 		9,
 		17,
 	],
+	'Example document #3 - end of parent element.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -268,6 +288,7 @@ is_deeply(
 		10,
 		3,
 	],
+	'Example document #3 - begin of child element.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -278,6 +299,7 @@ is_deeply(
 		10,
 		10,
 	],
+	'Example document #3 - character data.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -288,6 +310,7 @@ is_deeply(
 		10,
 		18,
 	],
+	'Example document #3 - end of child element.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -299,6 +322,7 @@ is_deeply(
 		11,
 		3,
 	],
+	'Example document #3 - begin of child element.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -309,6 +333,7 @@ is_deeply(
 		11,
 		10,
 	],
+	'Example document #3 - characted data.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -319,6 +344,7 @@ is_deeply(
 		11,
 		17,
 	],
+	'Example document #3 - end of child element.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -330,6 +356,7 @@ is_deeply(
 		12,
 		1,
 	],
+	'Example document #3 - end of family element.',
 );
 $right_ret =~ s/^<!DOCTYPE family \[//;
 $right_ret =~ s/\]>$//;
@@ -344,6 +371,7 @@ is_deeply(
 		2,
 		3,
 	],
+	'Example document #3 - DTD element for family.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -355,6 +383,7 @@ is_deeply(
 		3,
 		3,
 	],
+	'Example document #3 - DTD element for parent.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -366,6 +395,7 @@ is_deeply(
 		4,
 		3,
 	],
+	'Example document #3 - DTD element for child.',
 );
 
 # Test.
@@ -380,6 +410,7 @@ is_deeply(
 		1,
 		1,
 	],
+	'Example document #4 - XML declaration.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -408,6 +439,7 @@ is_deeply(
 		2,
 		1,
 	],
+	'Example document #4 - doctype.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -419,6 +451,7 @@ is_deeply(
 		16,
 		1,
 	],
+	'Example document #4 - start of family element.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -430,6 +463,7 @@ is_deeply(
 		17,
 		3,
 	],
+	'Example document #4 - start of title element.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -440,6 +474,7 @@ is_deeply(
 		17,
 		10,
 	],
+	'Example document #4 - character data.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -450,6 +485,7 @@ is_deeply(
 		17,
 		19,
 	],
+	'Example document #4 - end of title element.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -461,6 +497,7 @@ is_deeply(
 		18,
 		3,
 	],
+	'Example document #4 - start of parent element.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -471,6 +508,7 @@ is_deeply(
 		18,
 		25,
 	],
+	'Example document #4 - character data.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -481,6 +519,7 @@ is_deeply(
 		18,
 		29,
 	],
+	'Example document #4 - end of parent element.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -492,6 +531,7 @@ is_deeply(
 		19,
 		3,
 	],
+	'Example document #4 - start of parent element.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -502,6 +542,7 @@ is_deeply(
 		19,
 		25,
 	],
+	'Example document #4 - character data.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -512,6 +553,7 @@ is_deeply(
 		19,
 		31,
 	],
+	'Example document #4 - end of parent element.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -523,6 +565,7 @@ is_deeply(
 		20,
 		3,
 	],
+	'Example document #4 - start of child element.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -533,6 +576,7 @@ is_deeply(
 		20,
 		26,
 	],
+	'Example document #4 - character data.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -543,6 +587,7 @@ is_deeply(
 		20,
 		34,
 	],
+	'Example document #4 - end of family element.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -554,6 +599,7 @@ is_deeply(
 		21,
 		3,
 	],
+	'Example document #4 - image element.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -565,6 +611,7 @@ is_deeply(
 		22,
 		3,
 	],
+	'Example document #4 - start of child element.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -575,6 +622,7 @@ is_deeply(
 		22,
 		21,
 	],
+	'Example document #4 - character data.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -585,6 +633,7 @@ is_deeply(
 		22,
 		28,
 	],
+	'Example document #4 - end of child element.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -595,6 +644,7 @@ is_deeply(
 		22,
 		36,
 	],
+	'Example document #4 - footer character data.',
 );
 @tag = $obj->gettoken;
 is_deeply(
@@ -605,6 +655,7 @@ is_deeply(
 		24,
 		1,
 	],
+	'Example document #4 - end of family element.',
 );
 $right_ret =~ s/^<!DOCTYPE family \[//;
 $right_ret =~ s/\]>$//;
@@ -619,6 +670,7 @@ is_deeply(
 		2,
 		3,
 	],
+	'Example document #4 - DTD element for family.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -630,6 +682,7 @@ is_deeply(
 		3,
 		3,
 	],
+	'Example document #4 - DTD element for title.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -641,6 +694,7 @@ is_deeply(
 		4,
 		3,
 	],
+	'Example document #4 - DTD element for parent.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -652,6 +706,7 @@ is_deeply(
 		5,
 		3,
 	],
+	'Example document #4 - DTD attlist for parent role.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -663,6 +718,7 @@ is_deeply(
 		6,
 		3,
 	],
+	'Example document #4 - DTD element for child.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -674,6 +730,7 @@ is_deeply(
 		7,
 		3,
 	],
+	'Example document #4 - DTD attlist for child role.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -685,6 +742,7 @@ is_deeply(
 		8,
 		3,
 	],
+	'Example document #4 - DTD notation.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -698,6 +756,7 @@ is_deeply(
 		9,
 		3,
 	],
+	'Example document #4 - DTD entity.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -709,6 +768,7 @@ is_deeply(
 		11,
 		3,
 	],
+	'Example document #4 - DTD element for image.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -720,6 +780,7 @@ is_deeply(
 		12,
 		3,
 	],
+	'Example document #4 - DTD attlist for image source.',
 );
 @tag = $obj->gettoken;
 @tag = $obj->gettoken;
@@ -731,4 +792,5 @@ is_deeply(
 		13,
 		3,
 	],
+	'Example document #4 - DTD entity for footer.',
 );
