@@ -17,6 +17,7 @@ MANIFEST			This list of files
 META.yml
 Perl.pm
 README
+SIGNATURE
 t/data/comment1.sgml
 t/data/comment2.sgml
 t/data/comment3.sgml
