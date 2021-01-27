@@ -630,13 +630,13 @@ Perl extension module for reading html/sgml/xml files by tags.
 
 =head1 AUTHOR
 
-Michal Špaček L<mailto:skim@cpan.org>
+Michal Josef Špaček L<mailto:skim@cpan.org>
 
 L<http://skim.cz>
 
 =head1 LICENSE AND COPYRIGHT
 
- © Michal Špaček 2005-2021
+ © Michal Josef Špaček 2005-2021
  BSD 2-Clause License
 
 =head1 VERSION
