@@ -7,6 +7,7 @@
  - Improve LICENSE AND COPYRIGHT section in doc.
  - Improve SYNOPSIS section in doc.
  - Rewrite doc to use =head2 in METHODS section.
+ - Rewrite usage of Encode to Unicode::UTF8 in example.
  - Update Module::Install to 1.19 version.
  - Update author github username.
  - Update author name.

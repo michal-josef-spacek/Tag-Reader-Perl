@@ -473,8 +473,8 @@ Returns undef.
  use strict;
  use warnings;
 
- use Encode qw(decode_utf8 encode_utf8);
  use Tag::Reader::Perl;
+ use Unicode::UTF8 qw(decode_utf8 encode_utf8);
 
  # Object.
  my $obj = Tag::Reader::Perl->new;
