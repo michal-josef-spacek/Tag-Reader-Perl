@@ -1,6 +1,7 @@
 0.02
  - Add .travis.yml file.
  - Add test comments.
+ - Update Module::Install to 1.19 version.
  - Update examples/ directory.
 
 0.01 2016-04-20T16:40:33+02:00
