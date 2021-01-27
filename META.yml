@@ -30,7 +30,7 @@ requires:
   Readonly: 0
 resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Tag-Reader-Perl
-  homepage: https://github.com/tupinek/Tag-Reader-Perl
+  homepage: https://github.com/michal-josef-spacek/Tag-Reader-Perl
   license: http://opensource.org/licenses/bsd-license.php
-  repository: git://github.com/tupinek/Tag-Reader-Perl
+  repository: git://github.com/michal-josef-spacek/Tag-Reader-Perl
 version: '0.02'
