@@ -385,6 +385,7 @@ __END__
 =head1 SYNOPSIS
 
  use Tags::Reader::Perl;
+
  my $obj = Tags::Reader::Perl->new;
  my @tokens = $obj->gettoken;
  $obj->set_file($file, $force);
