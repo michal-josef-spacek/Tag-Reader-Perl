@@ -225,6 +225,9 @@ SEE ALSO
     HTML::TagReader
         Perl extension module for reading html/sgml/xml files by tags.
 
+REPOSITORY
+    <https://github.com/michal-josef-spacek/Tag-Reader-Perl>
+
 AUTHOR
     Michal Josef Špaček <mailto:skim@cpan.org>
 
