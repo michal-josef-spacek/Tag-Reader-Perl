@@ -29,7 +29,7 @@ requires:
   Error::Pure: 0.05
   Readonly: 0
 resources:
-  bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Tag-Reader-Perl
+  bugtracker: https://github.com/michal-josef-spacek/Tag-Reader-Perl/issues
   homepage: https://github.com/michal-josef-spacek/Tag-Reader-Perl
   license: http://opensource.org/licenses/bsd-license.php
   repository: git://github.com/michal-josef-spacek/Tag-Reader-Perl

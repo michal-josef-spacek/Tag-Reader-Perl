@@ -20,8 +20,7 @@ recursive_author_tests('xt');
 requires 'Class::Utils' => 0.02;
 requires 'Error::Pure' => 0.05;
 requires 'Readonly' => 0;
-resources 'bugtracker' => 'https://rt.cpan.org/Public/Dist/Display.html'.
-	'?Name=Tag-Reader-Perl';
+resources 'bugtracker' => 'https://github.com/michal-josef-spacek/Tag-Reader-Perl/issues';
 resources 'homepage' => 'https://github.com/michal-josef-spacek/Tag-Reader-Perl';
 resources 'repository' => 'git://github.com/michal-josef-spacek/Tag-Reader-Perl';
 test_requires 'English' => 0;
