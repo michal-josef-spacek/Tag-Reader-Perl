@@ -6,6 +6,7 @@
  - Fix Makefile.PL in case of use lib.
  - Improve LICENSE AND COPYRIGHT section in doc.
  - Improve SYNOPSIS section in doc.
+ - Rewrite doc to use =head2 in METHODS section.
  - Update Module::Install to 1.19 version.
  - Update author github username.
  - Update author name.

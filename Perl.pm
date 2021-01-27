@@ -393,31 +393,42 @@ __END__
 
 =head1 METHODS
 
-=over 8
+=head2 C<new()>
 
-=item C<new()>
+ my $obj = Tags::Reader::Perl->new;
 
- Constructor.
+Constructor.
 
-=item C<gettoken()>
+Returns instance of object.
 
- Get parsed token.
- Returns structure defining parsed token in array context. See TOKEN STRUCTURE
- e.g. <xml> → ('<xml>', 'xml', 1, 1)
- Returns parsed token in scalar mode.
- e.g. <xml> → '<xml>'
+=head2 C<gettoken>
 
-=item C<set_file($file[, $force])>
+ my @tokens = $obj->gettoken;
 
- Set file for parsing.
- If $force present, reset file for parsing if exists previous text or file.
+Get parsed token.
 
-=item C<set_text($text[, $force])>
+Returns structure defining parsed token in array context. See TOKEN STRUCTURE
+e.g. <xml> → ('<xml>', 'xml', 1, 1)
 
- Set text for parsing.
- if $force present, reset text for parsing if exists previous text or file.
+Returns parsed token in scalar mode. e.g. <xml> → '<xml>'
 
-=back
+=head2 C<set_file>
+
+ $obj->set_file($file, $force);
+
+Set file for parsing.
+If $force present, reset file for parsing if exists previous text or file.
+
+Returns undef.
+
+=head2 C<set_text>
+
+ $obj->set_text($text, $force);
+
+Set text for parsing.
+if $force present, reset text for parsing if exists previous text or file.
+
+Returns undef.
 
 =head1 TOKEN STRUCTURE
 
