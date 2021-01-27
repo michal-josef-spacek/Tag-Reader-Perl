@@ -6,4 +6,4 @@ use Test::More 'tests' => 2;
 use Test::NoWarnings;
 
 # Test.
-is($Tag::Reader::Perl::VERSION, 0.02, 'Version.');
+is($Tag::Reader::Perl::VERSION, 0.03, 'Version.');
