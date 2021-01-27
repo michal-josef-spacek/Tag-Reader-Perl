@@ -3,7 +3,7 @@ use warnings;
 
 use File::Object;
 use Tag::Reader::Perl;
-use Test::More 'tests' => 5;
+use Test::More 'tests' => 6;
 use Test::NoWarnings;
 
 # Directories.
@@ -67,4 +67,19 @@ is_deeply(
 		1,
 	],
 	'Parsing of simple element with attribute.',
+);
+
+# Test.
+$obj = Tag::Reader::Perl->new;
+$obj->set_file($data_dir->file('start_element5.sgml')->s);
+@tag = $obj->gettoken;
+is_deeply(
+	\@tag,
+	[
+		'<element attr="štědrý" />',
+		'element',
+		1,
+		1,
+	],
+	'Parsing of simple element with UTF-8 attribute.',
 );
