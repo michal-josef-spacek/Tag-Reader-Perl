@@ -13,7 +13,8 @@ SGML::SESIS a App::SGML2SESIS
 14. Benchmark oproti HTML::TokeParse
 15. Proc parsovani <![CDATA[a<x>b]]> vrati '![cdata[a' ?
 16. Komentare k testum.
-17.
+17. Je tady problem s <script>for (i < 1) { }</script> (< v datech)
+18.
 
 Applied
 =======
